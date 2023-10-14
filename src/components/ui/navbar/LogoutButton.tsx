@@ -1,13 +1,23 @@
 import { deleteCookie } from 'cookies-next'
 
+import { initUserData } from '@/constants/initUserData'
+import { ICookieUser } from '@/types/ICookieUser'
 import { LogOut } from 'lucide-react'
+import { Dispatch, SetStateAction } from 'react'
+import toast from 'react-hot-toast'
 import { DropdownMenuItem, DropdownMenuSeparator } from '../dropdown-menu'
 
-export default function LogoutButton() {
+interface Props {
+  setuserData: Dispatch<SetStateAction<ICookieUser>>
+}
+
+export default function LogoutButton({ setuserData }: Props) {
   const handleLogout = () => {
+    toast.success('Logged out successfully!')
     deleteCookie('userData')
     deleteCookie('refreshToken')
     deleteCookie('accessToken')
+    setuserData(initUserData)
   }
   return (
     <>

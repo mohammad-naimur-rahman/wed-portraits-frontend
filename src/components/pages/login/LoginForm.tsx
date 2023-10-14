@@ -58,7 +58,7 @@ export default function LoginForm({ query }: Props) {
     <section>
       <div className='flex justify-center items-center w-full mx-auto gap-5'>
         <h2 className='text-3xl text-center mr-3'>Login</h2>
-        <Img src='/logo-light.png' alt='Wed Portraits' className='w-32' />
+        <Img src='/logo.png' alt='Wed Portraits' className='w-32' />
       </div>
       <p className='text-muted-foreground text-center py-5'>Enter your information below to login to your account</p>
 
