@@ -7,8 +7,8 @@ import jwtDecode from 'jwt-decode'
 import { calculateTokenExpiration } from './calculateTokenExpiration'
 
 export const saveUserData = (authData: IAuthUser) => {
-  const accessToken = authData?.token?.accessToken
-  const refreshToken = authData?.token?.refreshToken
+  const accessToken = authData?.accessToken
+  const refreshToken = authData?.refreshToken
 
   // Decode jwt token
   const accessTokenData: ITokenData = jwtDecode(accessToken)
@@ -18,9 +18,9 @@ export const saveUserData = (authData: IAuthUser) => {
   const refreshTokenExpiration = calculateTokenExpiration(refreshTokenData)
 
   // Taking only the necessary data
-  const userData: IUser = authData?.user
+  const userData: IUser = authData?.data
   const userDataToSave: ICookieUser = {
-    _id: userData?.id,
+    id: userData?.id,
     email: userData?.email,
     name: userData?.name,
     image: userData?.image,

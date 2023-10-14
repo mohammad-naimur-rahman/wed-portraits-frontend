@@ -1,6 +1,6 @@
-import { IToken } from './IToken'
 import { IUser } from './IUser'
 export interface IAuthUser {
-  user: IUser
-  token: IToken
+  data: IUser
+  accessToken: string
+  refreshToken: string
 }

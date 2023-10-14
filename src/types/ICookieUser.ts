@@ -1,5 +1,5 @@
 export interface ICookieUser {
-  _id: string
+  id: string
   email: string
   name: string
   image?: string

@@ -37,7 +37,7 @@ export default function ProfileDropdown() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className='w-56' align='end' forceMount>
-        {userData?._id ? (
+        {userData?.id ? (
           <>
             <DropdownMenuLabel className='font-normal'>
               <div className='flex flex-col space-y-1'>
@@ -55,7 +55,7 @@ export default function ProfileDropdown() {
           </Link>
         )}
 
-        {userData?._id ? (
+        {userData?.id ? (
           <>
             <DropdownMenuGroup>
               <DropdownMenuItem className='flex flex-col gap-2 items-start focus:bg-background'>

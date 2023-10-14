@@ -1,7 +1,7 @@
 import { ICookieUser } from '@/types/ICookieUser'
 
 export const initUserData: ICookieUser = {
-  _id: '',
+  id: '',
   name: '',
   email: '',
   image: '',

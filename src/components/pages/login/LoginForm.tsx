@@ -5,7 +5,10 @@ import Img from '@/components/ui/img'
 import { Input } from '@/components/ui/input'
 import { envVars } from '@/configs'
 import { IAuthUser } from '@/types/IAuthUser'
+import { IError } from '@/types/IError'
 import { saveUserData } from '@/utils/auth/saveUserData'
+import { errorMessage } from '@/utils/error'
+import { loginZSchema } from '@/validation/auth'
 import { zodResolver } from '@hookform/resolvers/zod'
 import axios from 'axios'
 import { ArrowLeft } from 'lucide-react'
@@ -15,16 +18,6 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-hot-toast'
 import z from 'zod'
-
-const loginSchema = z.object({
-  email: z.string({ required_error: 'Email is required!' }).email({
-    message: 'Email is required!',
-  }),
-  password: z.string({ required_error: 'Password is required!' }).min(6, {
-    message: 'Password must be at least 6 characters!',
-  }),
-})
-
 interface Props {
   query: {
     redirected?: boolean
@@ -35,15 +28,14 @@ interface Props {
 export default function LoginForm({ query }: Props) {
   const [isLoading, setIsLoading] = useState(false)
   const { push } = useRouter()
-  const form = useForm<z.infer<typeof loginSchema>>({
-    resolver: zodResolver(loginSchema),
+  const form = useForm<z.infer<typeof loginZSchema>>({
+    resolver: zodResolver(loginZSchema),
   })
 
-  const onSubmit = async (values: z.infer<typeof loginSchema>) => {
+  const onSubmit = async (values: z.infer<typeof loginZSchema>) => {
     try {
       setIsLoading(true)
       const result = await axios.post(`${envVars.API_URL}/auth/login`, values)
-
       if (result?.data?.success) {
         setIsLoading(false)
         toast.success('Logged in successfully!')
@@ -56,8 +48,9 @@ export default function LoginForm({ query }: Props) {
         }
       }
     } catch (err) {
+      console.log(err)
       setIsLoading(false)
-      toast.error((err as Error)?.message)
+      toast.error(errorMessage(err as IError))
     }
   }
 
