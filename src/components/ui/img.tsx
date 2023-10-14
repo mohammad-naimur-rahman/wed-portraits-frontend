@@ -20,9 +20,9 @@ export default function Img({ src, alt, width = 500, height = 500, sizes = '40vw
       sizes={sizes}
       width={width}
       height={height}
-      style={{
-        backgroundColor: isLoading ? 'red' : '',
-      }}
+      // style={{
+      //   backgroundColor: isLoading ? 'red' : '',
+      // }}
       className={cn('w-full h-auto block', className)}
       loading='lazy'
       onLoadingComplete={() => setisLoading(false)}
