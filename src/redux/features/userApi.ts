@@ -2,6 +2,7 @@ import api from '@/redux/api/apiSlice'
 
 const rootApi = '/users'
 
+// TODO: add user login and signup api
 const userApi = api.injectEndpoints({
   endpoints: build => ({
     getProfile: build.query({

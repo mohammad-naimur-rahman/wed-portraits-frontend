@@ -7,9 +7,10 @@ interface Props {
   title: string
   meta?: ReactNode
   children: ReactNode
+  className?: string
 }
 
-export default function EmptyLayout({ title, meta, children }: Props) {
+export default function EmptyLayout({ title, meta, children, className }: Props) {
   return (
     <>
       <Head>
@@ -17,7 +18,7 @@ export default function EmptyLayout({ title, meta, children }: Props) {
         {meta}
       </Head>
       <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
-        <div>{children}</div>
+        <div className={className}>{children}</div>
         <Toaster position='top-center' reverseOrder={false} />
       </ThemeProvider>
     </>
