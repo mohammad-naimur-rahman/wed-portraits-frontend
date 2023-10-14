@@ -69,7 +69,7 @@ export default function ProfileDropdown() {
               </Link>
             </DropdownMenuGroup>
 
-            <LogoutButton setuserData={setuserData} />
+            <LogoutButton />
           </>
         ) : null}
       </DropdownMenuContent>
