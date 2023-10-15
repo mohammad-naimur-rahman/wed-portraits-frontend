@@ -1,9 +1,17 @@
+import withAuth from '@/HOC/WithAuth'
+import DashboardLayout from '@/components/layout/DashboardLayout'
 import { useGetProfileQuery } from '@/redux/features/userApi'
 import { getAccessToken } from '@/utils/auth/getAccessToken'
 
-export default function ProfilePage() {
+function ProfilePage() {
   const token = getAccessToken()
   const { data } = useGetProfileQuery(token)
   console.log(data)
-  return <div>ProfilePage</div>
+  return (
+    <DashboardLayout title='Profile'>
+      <p>Profile</p>
+    </DashboardLayout>
+  )
 }
+
+export default withAuth(ProfilePage)
