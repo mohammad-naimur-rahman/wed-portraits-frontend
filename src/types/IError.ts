@@ -1,3 +1,3 @@
 import { AxiosError } from 'axios'
 
-export type IError = Error | AxiosError
+export type IError = Error | AxiosError | { data: { message: string } }
