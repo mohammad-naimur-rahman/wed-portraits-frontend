@@ -17,7 +17,7 @@ export default function DashboardLayout({ title, children, meta, className, user
     <EmptyLayout title={title} meta={meta}>
       <DashboardTopNav />
       <DashboardSideNav userRole={userRole} />
-      <main className={cn(className, 'h-min-body mt-16 pl-[238px] p-2')}>{children}</main>
+      <main className={cn(className, 'h-min-body mt-16 pl-[238px] pt-2 pr-2 pb-2')}>{children}</main>
     </EmptyLayout>
   )
 }
