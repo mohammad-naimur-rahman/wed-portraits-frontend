@@ -34,6 +34,17 @@ const userApi = api.injectEndpoints({
       }),
       invalidatesTags: ['user'],
     }),
+    changeRole: build.mutation({
+      query: ({ email, role, token }) => ({
+        url: `${rootApi}/admins/${email}`,
+        method: 'PATCH',
+        body: { role },
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }),
+      invalidatesTags: ['user'],
+    }),
     deleteUser: build.mutation({
       query: ({ id, token }) => ({
         url: `${rootApi}/${id}`,
@@ -47,4 +58,10 @@ const userApi = api.injectEndpoints({
   }),
 })
 
-export const { useGetProfileQuery, useUpdateProfileMutation, useGetUsersQuery } = userApi
+export const {
+  useGetProfileQuery,
+  useUpdateProfileMutation,
+  useGetUsersQuery,
+  useChangeRoleMutation,
+  useDeleteUserMutation,
+} = userApi
