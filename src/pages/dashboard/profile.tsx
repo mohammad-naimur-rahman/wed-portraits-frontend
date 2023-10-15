@@ -1,6 +1,10 @@
 import withAuth from '@/HOC/withAuth'
 import DashboardLayout from '@/components/layout/DashboardLayout'
+import Name from '@/components/pages/dashboard/profile/Name'
 import ProfileImage from '@/components/pages/dashboard/profile/ProfileImage'
+import TotalBookings from '@/components/pages/dashboard/profile/TotalBookings'
+import UserEmail from '@/components/pages/dashboard/profile/UserEmail'
+import UserRole from '@/components/pages/dashboard/profile/UserRole'
 import { useGetProfileQuery, useUpdateProfileMutation } from '@/redux/features/userApi'
 import { IError } from '@/types/IError'
 import { IUser } from '@/types/IUser'
@@ -24,15 +28,19 @@ function ProfilePage({ userData }: Props) {
 
   useEffect(() => {
     if (isError) toast.error(errorMessage(error as IError))
-    if (isUpdateError) toast.error(errorMessage(error as IError))
+    if (isUpdateError) toast.error(errorMessage(updateError as IError))
     if (isUpdateSuccess) toast.success('Profile Updated Successfully')
   }, [isError, error, isUpdateError, isUpdateSuccess, updateError])
 
   return (
     <DashboardLayout title={`Profile | ${userData?.name}`} userRole={userData?.role} isError={isError} error={error}>
-      <div className='flex flex-col text-center justify-center items-center'>
+      <section className='flex flex-col text-center justify-center items-center'>
         <ProfileImage userData={userDetails} isLoading={isLoading} updateProfile={updateProfile} />
-      </div>
+        <Name name={userDetails?.name} isLoading={isLoading} updateProfile={updateProfile} />
+        <UserEmail email={userDetails?.email} isLoading={isLoading} updateProfile={updateProfile} />
+        <UserRole role={userDetails?.role} isLoading={isLoading} />
+        <TotalBookings userDetails={userDetails} isLoading={isLoading} />
+      </section>
     </DashboardLayout>
   )
 }

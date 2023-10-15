@@ -2,11 +2,11 @@ import animationData from '@/assets/lottie/imageUploading.json'
 import Img from '@/components/ui/img'
 import Overlay from '@/components/ui/overlay'
 import { Skeleton } from '@/components/ui/skeleton'
+import { IUpdateIdData } from '@/types/IUpdateIdData'
 import { IUser } from '@/types/IUser'
 import { getAccessToken } from '@/utils/auth/getAccessToken'
 import { getUserId } from '@/utils/auth/getUserId'
 import { imageUploader } from '@/utils/imageUploader'
-import { CookieValueTypes } from 'cookies-next'
 import { Camera } from 'lucide-react'
 import { ChangeEvent, useRef, useState } from 'react'
 import { toast } from 'react-hot-toast'
@@ -14,7 +14,7 @@ import { toast } from 'react-hot-toast'
 interface Props {
   isLoading: boolean
   userData: IUser
-  updateProfile: (payload: { payload: Partial<IUser>; id: string; token: CookieValueTypes }) => void
+  updateProfile: (payload: IUpdateIdData<IUser>) => void
 }
 
 export default function ProfileImage({ isLoading, userData, updateProfile }: Props) {
