@@ -3,8 +3,8 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import Router from 'next/router'
 
 interface Ctx {
-  req?: NextApiRequest
-  res?: NextApiResponse
+  req: NextApiRequest
+  res: NextApiResponse
   asPath: string
 }
 
@@ -14,8 +14,10 @@ const login = (ctx: Ctx) => {
 
 const checkUserAuthentication = (ctx: Ctx) => {
   const { req, res } = ctx
-  const jwt = getCookie('refreshToken', { req, res })
-  return { auth: !!jwt }
+  const jwt = getCookie('accessToken', { req, res })
+  const userData = getCookie('userData', { req, res })
+  const parsedUserData = userData && JSON.parse(userData)
+  return { auth: !!jwt, userData: parsedUserData }
 }
 
 const withAuth = (WrappedComponent: any) => {
@@ -40,12 +42,13 @@ const withAuth = (WrappedComponent: any) => {
     } else if (WrappedComponent.getInitialProps) {
       const wrappedProps = await WrappedComponent.getInitialProps({
         ...ctx,
-        auth: userAuth,
+        auth: userAuth.auth,
+        userData: userAuth.userData,
       })
-      return { ...wrappedProps, userAuth }
+      return { ...wrappedProps }
     }
 
-    return { userAuth }
+    return { auth: userAuth.auth, userData: userAuth.userData }
   }
 
   return HocComponent

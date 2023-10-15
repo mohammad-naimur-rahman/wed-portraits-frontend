@@ -1,5 +1,4 @@
 import { IAuthUser } from '@/types/IAuthUser'
-import { ICookieUser } from '@/types/ICookieUser'
 import { ITokenData } from '@/types/ITokenData'
 import { IUser } from '@/types/IUser'
 import { setCookie } from 'cookies-next'
@@ -19,12 +18,6 @@ export const saveUserData = (authData: IAuthUser) => {
 
   // Taking only the necessary data
   const userData: IUser = authData?.data
-  const userDataToSave: ICookieUser = {
-    id: userData?.id,
-    email: userData?.email,
-    name: userData?.name,
-    image: userData?.image,
-  }
 
   setCookie('accessToken', accessToken, {
     maxAge: accessTokenExpiration,
@@ -34,7 +27,7 @@ export const saveUserData = (authData: IAuthUser) => {
   })
 
   // Saving usee data with refresh token expiration because when refresh token will expire, user needs to login again
-  setCookie('userData', JSON.stringify(userDataToSave), {
+  setCookie('userData', JSON.stringify(userData), {
     maxAge: refreshTokenExpiration,
   })
 }
