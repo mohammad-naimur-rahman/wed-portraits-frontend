@@ -2,6 +2,7 @@ import withAuth from '@/HOC/withAuth'
 import DashboardLayout from '@/components/layout/DashboardLayout'
 import { Button } from '@/components/ui/button'
 import ConfirmationPrompt from '@/components/ui/dashboard/common/ConfirmationPrompt'
+import { Skeleton } from '@/components/ui/skeleton'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import Typography from '@/components/ui/typography'
 import { useDeleteUserMutation, useGetUsersQuery } from '@/redux/features/userApi'
@@ -39,40 +40,49 @@ function UsersPage({ userData }: Props) {
       <Typography className='text-center py-10' variant='h2'>
         All Users
       </Typography>
-      <Table className='max-w-4xl mx-auto'>
-        <TableHeader>
-          <TableRow>
-            <TableHead>Name</TableHead>
-            <TableHead>Email</TableHead>
-            <TableHead>Role</TableHead>
-            <TableHead className='w-40'>Total Bookings</TableHead>
-            <TableHead>Delete User</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {users?.map(user => (
-            <TableRow key={user?.id}>
-              <TableCell className='font-medium'>{user?.name}</TableCell>
-              <TableCell>{user?.email}</TableCell>
-              <TableCell> {transformRole(user?.role)}</TableCell>
-              <TableCell className='text-right'>{user?.bookings?.length}</TableCell>
-              <TableCell>
-                {user?.role !== 'super_admin' ? (
-                  <Button
-                    variant={'destructive'}
-                    size='icon'
-                    onClick={() => {
-                      setdeleteUserId(user?.id)
-                      setshowDeletePromt(true)
-                    }}>
-                    <Trash2 />
-                  </Button>
-                ) : null}
-              </TableCell>
-            </TableRow>
+      {isLoading ? (
+        <>
+          {Array.from({ length: 10 }).map((_, i) => (
+            <Skeleton key={i} className='w-full max-w-4xl mx-auto h-10 my-2' />
           ))}
-        </TableBody>
-      </Table>
+        </>
+      ) : (
+        <Table className='max-w-4xl mx-auto'>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Name</TableHead>
+              <TableHead>Email</TableHead>
+              <TableHead>Role</TableHead>
+              <TableHead className='w-40'>Total Bookings</TableHead>
+              <TableHead>Delete User</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {users?.map(user => (
+              <TableRow key={user?.id}>
+                <TableCell className='font-medium'>{user?.name}</TableCell>
+                <TableCell>{user?.email}</TableCell>
+                <TableCell> {transformRole(user?.role)}</TableCell>
+                <TableCell className='text-right'>{user?.bookings?.length}</TableCell>
+                <TableCell>
+                  {user?.role !== 'super_admin' ? (
+                    <Button
+                      variant={'destructive'}
+                      size='icon'
+                      onClick={() => {
+                        setdeleteUserId(user?.id)
+                        setshowDeletePromt(true)
+                      }}>
+                      <Trash2 />
+                    </Button>
+                  ) : null}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      )}
+
       <ConfirmationPrompt
         open={showDeletePromt}
         onOpenChange={setshowDeletePromt}

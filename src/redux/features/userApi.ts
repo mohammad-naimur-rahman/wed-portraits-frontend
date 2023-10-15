@@ -43,7 +43,7 @@ const userApi = api.injectEndpoints({
           Authorization: `Bearer ${token}`,
         },
       }),
-      invalidatesTags: ['user'],
+      invalidatesTags: ['users'],
     }),
     deleteUser: build.mutation({
       query: ({ id, token }) => ({
