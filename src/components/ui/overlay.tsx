@@ -1,5 +1,5 @@
 import { lottieDefaultOptions } from '@/constants/lottieDefaultOptions'
-import clsx from 'clsx'
+import { cn } from '@/lib/utils'
 import Lottie from 'react-lottie'
 
 interface Props {
@@ -10,7 +10,7 @@ interface Props {
 export default function Overlay({ isOpen, animationData }: Props) {
   return (
     <div
-      className={clsx('w-full h-screen flex items-center justify-center fixed left-0 top-0 backdrop-blur-md z-50', {
+      className={cn('w-full min-h-screen flex items-center justify-center fixed left-0 top-0 backdrop-blur-md z-50', {
         hidden: !isOpen,
       })}>
       <div className='max-w-md'>

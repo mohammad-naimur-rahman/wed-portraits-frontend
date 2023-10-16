@@ -9,9 +9,10 @@ import { IService } from '@/types/IService'
 import { getAccessToken } from '@/utils/auth/getAccessToken'
 import { errorMessage } from '@/utils/error'
 import { transformRole } from '@/utils/transformRole'
-import { PenSquare, Trash } from 'lucide-react'
+import { Trash } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
+import UpdateService from '../services/UpdateService'
 
 interface Props {
   service: IService
@@ -49,9 +50,8 @@ export default function ServiceCard({ service }: Props) {
           <Typography variant='h4'>${service?.price}</Typography>
         </div>
         <div className='flex justify-between flex-wrap gap-3'>
-          <ButtonExtended icon={<PenSquare />} variant='default' size='sm'>
-            Edit Service
-          </ButtonExtended>
+          <UpdateService service={service} />
+
           <ButtonExtended
             icon={<Trash />}
             variant='destructive'

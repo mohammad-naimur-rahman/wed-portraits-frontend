@@ -1,4 +1,4 @@
-import animationData from '@/assets/lottie/savingFile.json'
+import animationData from '@/assets/lottie/updating.json'
 import ButtonExtended from '@/components/ui/buttonExtended'
 import ImageUploaderComponent from '@/components/ui/dashboard/common/ImageUploaderComponent'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
@@ -16,27 +16,31 @@ import {
 } from '@/components/ui/select'
 import { Textarea } from '@/components/ui/textarea'
 import { serviceCategoryArray } from '@/constants/dashboard/serviceCategoryArray'
-import { useCreateServiceMutation } from '@/redux/features/servicesApi'
+import { useUpdateServiceMutation } from '@/redux/features/servicesApi'
 import { IError } from '@/types/IError'
+import { IService } from '@/types/IService'
 import { getAccessToken } from '@/utils/auth/getAccessToken'
 import { errorMessage } from '@/utils/error'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { DialogClose } from '@radix-ui/react-dialog'
-import { FilePlus2 } from 'lucide-react'
+import { PenSquare } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import { z } from 'zod'
 
-export default function AddNewService() {
-  const [createService, { isLoading, isSuccess, isError, error }] = useCreateServiceMutation()
+interface Props {
+  service: IService
+}
 
-  const [image, setimage] = useState('')
+export default function UpdateService({ service }: Props) {
+  const [updateService, { isLoading, isSuccess, isError, error }] = useUpdateServiceMutation()
+
+  const [image, setimage] = useState(service.image)
 
   const createServiceSchema = z.object({
     title: z.string(),
     description: z.string(),
-    image: z.string().optional(),
     price: z.coerce.number(),
     status: z.enum(['active', 'inactive', 'upcoming']),
     category: z.enum(serviceCategoryArray as [string, ...string[]]),
@@ -45,8 +49,11 @@ export default function AddNewService() {
   const form = useForm<z.infer<typeof createServiceSchema>>({
     resolver: zodResolver(createServiceSchema),
     defaultValues: {
-      status: 'active',
-      category: 'Wedding',
+      title: service?.title,
+      description: service?.description,
+      price: service?.price,
+      status: service?.status,
+      category: service?.category,
     },
   })
 
@@ -56,7 +63,7 @@ export default function AddNewService() {
       return
     }
 
-    createService({ payload: { ...values, image }, token: getAccessToken() })
+    updateService({ id: service.id, payload: { ...values, image }, token: getAccessToken() })
   }
 
   useEffect(() => {
@@ -76,13 +83,13 @@ export default function AddNewService() {
     <>
       <Dialog>
         <DialogTrigger asChild>
-          <ButtonExtended icon={<FilePlus2 />} type='submit'>
-            Add New Service
+          <ButtonExtended icon={<PenSquare />} size='sm'>
+            Edit Service
           </ButtonExtended>
         </DialogTrigger>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Add New Service</DialogTitle>
+            <DialogTitle>Update Service</DialogTitle>
           </DialogHeader>
 
           <Form {...form}>
@@ -175,8 +182,8 @@ export default function AddNewService() {
               />
               <ImageUploaderComponent image={image} setimage={setimage} />
               <DialogClose>
-                <ButtonExtended icon={<FilePlus2 />} type='submit'>
-                  Add New Service
+                <ButtonExtended icon={<PenSquare />} type='submit'>
+                  Update Service
                 </ButtonExtended>
               </DialogClose>
             </form>

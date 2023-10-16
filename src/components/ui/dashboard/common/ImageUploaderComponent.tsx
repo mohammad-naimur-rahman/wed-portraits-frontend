@@ -32,7 +32,7 @@ export default function ImageUploaderComponent({ image, setimage }: Props) {
   return (
     <>
       {image ? (
-        <div className='flex items-center gap-5 py-5'>
+        <div className='flex w-full items-center gap-5 py-5'>
           <Img src={image} alt='Image' className='max-w-xs h-auto' sizes='20vw' width={300} height={300} />
           <Button size='icon' variant='ghost' onClick={() => setimage('')}>
             <X className='w-6 h-6' />
