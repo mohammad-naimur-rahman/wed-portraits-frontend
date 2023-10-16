@@ -14,6 +14,7 @@ import { qs } from '@/utils/form/qs'
 import { Eraser, Search } from 'lucide-react'
 import { Dispatch, FormEvent, SetStateAction } from 'react'
 import ButtonExtended from '../buttonExtended'
+import RangeSlider from '../range-slider'
 
 interface Props {
   query: IServiceQueries
@@ -63,7 +64,7 @@ export default function ServiceFilterFields({ query, setquery, setqueryString }:
   }
 
   return (
-    <form onSubmit={handleQuery} className='flex flex-wrap gap-2 px-2 mt-5 justify-center pb-5'>
+    <form onSubmit={handleQuery} className='flex flex-wrap items-center gap-2 px-2 mt-5 justify-center pb-5'>
       <Input
         placeholder='🔍  Search with title'
         className='max-w-xs'
@@ -71,20 +72,15 @@ export default function ServiceFilterFields({ query, setquery, setqueryString }:
         onChange={e => setquery({ ...query, search: e.target.value })}
       />
 
-      <Input
-        placeholder='Minimum price'
-        className='w-max min-w-[120px]'
-        value={query.minPrice}
-        type='number'
-        onChange={e => setquery({ ...query, minPrice: Number(e.target.value) })}
-      />
-
-      <Input
-        placeholder='Maximum price'
-        className='w-max min-w-[120px]'
-        value={query.maxPrice}
-        type='number'
-        onChange={e => setquery({ ...query, maxPrice: Number(e.target.value) })}
+      <RangeSlider
+        className='w-40 h-7'
+        min={0}
+        max={1000}
+        minDistance={200}
+        value={[query.minPrice, query.maxPrice]}
+        onAfterChange={value => {
+          setquery({ ...query, minPrice: value[0], maxPrice: value[1] })
+        }}
       />
 
       <Select

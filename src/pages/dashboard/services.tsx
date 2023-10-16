@@ -49,7 +49,7 @@ function ProfilePage({ userData }: Props) {
         </div>
       </section>
 
-      <NoContent isLoading={isFetching} data={data} content='Discussion' createNewLink='/dashboard/create/discussion' />
+      <NoContent isLoading={isFetching} data={data} content='Service' />
     </DashboardLayout>
   )
 }
