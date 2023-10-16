@@ -1,7 +1,7 @@
 import animationData from '@/assets/lottie/imageUploading.json'
 import { IError } from '@/types/IError'
 import { errorMessage } from '@/utils/error'
-import { imageUploader } from '@/utils/imageUploader'
+import { imageUploader } from '@/utils/form/imageUploader'
 import { X } from 'lucide-react'
 import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react'
 import toast from 'react-hot-toast'
