@@ -1,5 +1,5 @@
 import ButtonExtended from '@/components/ui/buttonExtended'
-import ImageUploader from '@/components/ui/dashboard/common/ImageUploader'
+import ImageUploaderComponent from '@/components/ui/dashboard/common/ImageUploaderComponent'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
@@ -36,6 +36,7 @@ export default function AddNewService() {
     description: z.string(),
     image: z.string().optional(),
     price: z.coerce.number(),
+    status: z.enum(['active', 'inactive', 'upcoming']).default('active'),
     category: z.enum(serviceCategoryArray as [string, ...string[]]).default('Wedding'),
   })
 
@@ -53,9 +54,17 @@ export default function AddNewService() {
   }
 
   useEffect(() => {
-    if (isError) toast.error(errorMessage(error as IError))
-    if (isSuccess) toast.success('Service Created Successfully!')
-  }, [isError, error, isSuccess])
+    if (isError) {
+      form.reset()
+      setimage('')
+      toast.error(errorMessage(error as IError))
+    }
+    if (isSuccess) {
+      form.reset()
+      setimage('')
+      toast.success('Service Created Successfully!')
+    }
+  }, [isError, error, isSuccess, form])
 
   return (
     <Dialog>
@@ -133,7 +142,31 @@ export default function AddNewService() {
                 </FormItem>
               )}
             />
-            <ImageUploader image={image} setimage={setimage} />
+            <FormField
+              control={form.control}
+              name='status'
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <SelectTrigger>
+                        <SelectValue placeholder='Status' />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          <SelectLabel>Choose Status</SelectLabel>
+                          <SelectItem value='active'>Active</SelectItem>
+                          <SelectItem value='inactive'>Inactive</SelectItem>
+                          <SelectItem value='upcoming'>Upcoming</SelectItem>
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <ImageUploaderComponent image={image} setimage={setimage} />
             <DialogClose>
               <ButtonExtended icon={<FilePlus2 />} type='submit'>
                 Add New Service

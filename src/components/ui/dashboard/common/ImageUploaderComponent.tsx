@@ -1,20 +1,34 @@
+import animationData from '@/assets/lottie/imageUploading.json'
+import { IError } from '@/types/IError'
+import { errorMessage } from '@/utils/error'
 import { imageUploader } from '@/utils/imageUploader'
 import { X } from 'lucide-react'
-import { ChangeEvent, Dispatch, SetStateAction } from 'react'
+import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react'
+import toast from 'react-hot-toast'
 import { Button } from '../../button'
 import Img from '../../img'
 import { Input } from '../../input'
+import Overlay from '../../overlay'
 
 interface Props {
   image: string
   setimage: Dispatch<SetStateAction<string>>
 }
 
-export default function ImageUploader({ image, setimage }: Props) {
+export default function ImageUploaderComponent({ image, setimage }: Props) {
+  const [isLoading, setisLoading] = useState(false)
   const hadleImageUpload = async (e: ChangeEvent<HTMLInputElement>) => {
-    const imageInfo = await imageUploader(e)
-    setimage(imageInfo)
+    try {
+      setisLoading(true)
+      const imageInfo = await imageUploader(e)
+      setisLoading(false)
+      setimage(imageInfo)
+    } catch (err) {
+      setisLoading(false)
+      toast.error(errorMessage(err as IError))
+    }
   }
+
   return (
     <>
       {image ? (
@@ -27,6 +41,7 @@ export default function ImageUploader({ image, setimage }: Props) {
       ) : (
         <Input type='file' onChange={hadleImageUpload} />
       )}
+      <Overlay animationData={animationData} isOpen={isLoading} />
     </>
   )
 }

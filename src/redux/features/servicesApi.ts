@@ -21,7 +21,17 @@ const servicesApi = api.injectEndpoints({
       }),
       invalidatesTags: ['services'],
     }),
+    deleteService: build.mutation({
+      query: ({ id, token }) => ({
+        url: `${rootApi}/${id}`,
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }),
+      invalidatesTags: ['services'],
+    }),
   }),
 })
 
-export const { useGetAllServicesQuery, useCreateServiceMutation } = servicesApi
+export const { useGetAllServicesQuery, useCreateServiceMutation, useDeleteServiceMutation } = servicesApi

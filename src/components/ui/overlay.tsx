@@ -10,7 +10,7 @@ interface Props {
 export default function Overlay({ isOpen, animationData }: Props) {
   return (
     <div
-      className={clsx('w-full h-screen flex items-center justify-center fixed left-0 top-0 backdrop-blur-md z-10', {
+      className={clsx('w-full h-screen flex items-center justify-center fixed left-0 top-0 backdrop-blur-md z-50', {
         hidden: !isOpen,
       })}>
       <div className='max-w-md'>
