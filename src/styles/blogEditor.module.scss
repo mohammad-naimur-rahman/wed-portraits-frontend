@@ -1,0 +1,36 @@
+.blogEditor {
+  @apply rounded-lg p-0;
+
+  .blog-toolbar {
+    @apply bg-background;
+  }
+
+  * {
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  h1 {
+    @apply text-5xl font-semibold;
+  }
+
+  h2 {
+    @apply text-4xl font-semibold;
+  }
+
+  h3 {
+    @apply text-3xl font-semibold;
+  }
+
+  h4 {
+    @apply text-2xl font-semibold;
+  }
+
+  h5 {
+    @apply text-xl font-semibold;
+  }
+
+  h6 {
+    @apply text-lg font-semibold;
+  }
+}

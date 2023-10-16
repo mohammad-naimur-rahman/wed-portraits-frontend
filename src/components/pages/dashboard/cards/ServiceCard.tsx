@@ -38,11 +38,15 @@ export default function ServiceCard({ service }: Props) {
       <Typography variant='body-small' className='px-3 text-justify'>
         {service?.description}
       </Typography>
-      <Button className='rounded-full self-start mt-1' variant='outline' size='sm'>
-        {service?.category}
-      </Button>
 
-      <div className='flex flex-col gap-1 p-3'>
+      <div className='flex justify-between items-center px-3 pt-3'>
+        <Button className='rounded-full self-start' variant='outline' size='sm'>
+          {service?.category}
+        </Button>
+        <p className='text-lg font-semibold'>{service?.reviews?.length} reviews</p>
+      </div>
+
+      <div className='flex flex-col gap-1 p-3 pt-1'>
         <div className='flex justify-between py-2'>
           <Typography variant='body' className='font-semibold text-primary'>
             {transformRole(service?.status)}

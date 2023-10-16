@@ -1,0 +1,87 @@
+.blog-toolbar {
+  background: hsl(var(--background)) !important;
+  padding: 5px 0 !important;
+  border: none !important;
+  @apply rounded-lg;
+
+  & > * {
+    margin: 0 8px !important;
+  }
+
+  .rdw-option-wrapper {
+    background-color: var(--secondary) !important;
+    width: 35px;
+    height: 35px;
+    margin: 1px;
+    border: none !important;
+    @apply rounded-md;
+
+    &:hover {
+      box-shadow: none !important;
+    }
+
+    img {
+      @apply dark:invert;
+    }
+  }
+
+  .rdw-link-modal,
+  .rdw-embedded-modal,
+  .rdw-image-modal {
+    background: hsl(var(--background)) !important;
+    box-shadow: none !important;
+    border-color: hsl(var(--border)) !important;
+    right: 0 !important;
+    left: unset !important;
+
+    button {
+      background: hsl(var(--background)) !important;
+      margin-right: 3px;
+    }
+  }
+
+  .rdw-dropdown-wrapper {
+    background: hsl(var(--muted)) !important;
+    @apply rounded-md border-0;
+
+    &:hover {
+      box-shadow: none !important;
+    }
+
+    .rdw-dropdown-optionwrapper {
+      background: hsl(var(--background)) !important;
+    }
+
+    .rdw-dropdownoption-active,
+    .rdw-dropdownoption-highlighted {
+      background: hsl(var(--muted)) !important;
+    }
+
+    .rdw-dropdown-carettoopen {
+      border-top-color: hsl(var(--foreground)) !important;
+    }
+
+    .rdw-dropdown-carettoclose {
+      border-bottom-color: hsl(var(--foreground)) !important;
+    }
+  }
+
+  .rdw-option-active {
+    box-shadow: none !important;
+    background-color: hsl(var(--secondary)) !important;
+  }
+}
+
+.blog-editor {
+  box-sizing: border-box;
+  height: calc(100vh - 210px) !important;
+  @apply rounded-lg;
+}
+
+.blog-wrapper {
+  @apply border rounded-lg;
+}
+
+.public-DraftEditor-content {
+  padding: 10px;
+}
