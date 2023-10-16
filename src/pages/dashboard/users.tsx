@@ -9,6 +9,7 @@ import { useDeleteUserMutation, useGetUsersQuery } from '@/redux/features/userAp
 import { IError } from '@/types/IError'
 import { IUser } from '@/types/IUser'
 import { getAccessToken } from '@/utils/auth/getAccessToken'
+import { getUserData } from '@/utils/auth/getUserData'
 import { errorMessage } from '@/utils/error'
 import { transformRole } from '@/utils/transformRole'
 import { Trash2 } from 'lucide-react'
@@ -21,6 +22,7 @@ interface Props {
 
 function UsersPage({ userData }: Props) {
   const token = getAccessToken()
+  const userDetails = getUserData()
   const [showDeletePromt, setshowDeletePromt] = useState(false)
   const [deleteUserId, setdeleteUserId] = useState('')
   const { isLoading, isError, error, data } = useGetUsersQuery({ token })
@@ -65,7 +67,7 @@ function UsersPage({ userData }: Props) {
                 <TableCell> {transformRole(user?.role)}</TableCell>
                 <TableCell className='text-right'>{user?.bookings?.length}</TableCell>
                 <TableCell>
-                  {user?.role !== 'super_admin' ? (
+                  {user?.role !== 'super_admin' && userDetails?.role === 'super_admin' ? (
                     <Button
                       variant={'destructive'}
                       size='icon'
