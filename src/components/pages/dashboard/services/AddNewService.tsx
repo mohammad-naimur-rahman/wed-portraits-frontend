@@ -26,11 +26,8 @@ import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import { z } from 'zod'
 
-interface Props {
-  category: 'Wedding' | 'Birthday' | 'Anniversary' | 'Others'
-}
-export default function AddNewService({ category }: Props) {
-  const [createService, { isLoading, isSuccess, isError, error }] = useCreateServiceMutation()
+export default function AddNewService() {
+  const [createService, { isSuccess, isError, error }] = useCreateServiceMutation()
 
   const [image, setimage] = useState('')
 
@@ -39,7 +36,7 @@ export default function AddNewService({ category }: Props) {
     description: z.string(),
     image: z.string().optional(),
     price: z.coerce.number(),
-    category: z.enum(serviceCategoryArray as [string, ...string[]]).default(category),
+    category: z.enum(serviceCategoryArray as [string, ...string[]]).default('Wedding'),
   })
 
   const form = useForm<z.infer<typeof createServiceSchema>>({
@@ -53,12 +50,11 @@ export default function AddNewService({ category }: Props) {
     }
 
     createService({ payload: { ...values, image }, token: getAccessToken() })
-    // changeRole({ email: values.email, token: getAccessToken(), role: 'admin' })
   }
 
   useEffect(() => {
     if (isError) toast.error(errorMessage(error as IError))
-    if (isSuccess) toast.success('Service Created Successfully')
+    if (isSuccess) toast.success('Service Created Successfully!')
   }, [isError, error, isSuccess])
 
   return (
