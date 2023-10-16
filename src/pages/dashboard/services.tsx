@@ -2,6 +2,7 @@ import withAuth from '@/HOC/withAuth'
 import DashboardLayout from '@/components/layout/DashboardLayout'
 import ServiceCard from '@/components/pages/dashboard/cards/ServiceCard'
 import AddNewService from '@/components/pages/dashboard/services/AddNewService'
+import PaginationFields from '@/components/ui/common/PaginationFields'
 import ServiceFilterFields from '@/components/ui/common/ServiceFilterFields'
 import NoContent from '@/components/ui/dashboard/common/NoContent'
 import { Skeleton } from '@/components/ui/skeleton'
@@ -22,11 +23,11 @@ function ProfilePage({ userData }: Props) {
   const [query, setquery] = useState(initServiceQueries)
   const [queryString, setqueryString] = useState(qs(initServiceQueries))
 
-  const { data, isFetching } = useGetAllServicesQuery(queryString)
+  const { data, isFetching, error, isError } = useGetAllServicesQuery(queryString)
   const services: IService[] = data?.data
 
   return (
-    <DashboardLayout title='Services | Dashboard' userRole={userData?.role}>
+    <DashboardLayout title='Services | Dashboard' userRole={userData?.role} error={error} isError={isError}>
       <section className='p-5'>
         <div className='flex justify-between items-center pb-5'>
           <Typography variant='h2'>All Services</Typography>
@@ -47,6 +48,8 @@ function ProfilePage({ userData }: Props) {
             <ServiceCard service={service} key={service.id} />
           ))}
         </div>
+
+        <PaginationFields data={data} query={query} setquery={setquery} setqueryString={setqueryString} />
       </section>
 
       <NoContent isLoading={isFetching} data={data} content='Service' />

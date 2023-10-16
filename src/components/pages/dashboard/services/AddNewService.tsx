@@ -80,7 +80,7 @@ export default function AddNewService() {
             Add New Service
           </ButtonExtended>
         </DialogTrigger>
-        <DialogContent>
+        <DialogContent className='max-w-2xl'>
           <DialogHeader>
             <DialogTitle>Add New Service</DialogTitle>
           </DialogHeader>
