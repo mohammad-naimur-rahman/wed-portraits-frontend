@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import Img from '../img'
+import Cart from './Cart'
 import MobileNavmenu from './MobileNavmenu'
 import Navmenu from './Navmenu'
 import ProfileDropdown from './ProfileDropdown'
@@ -28,6 +29,7 @@ export default function Navbar() {
       </Link>
       <Navmenu navigationMenu={navigationMenu} />
       <div className='flex items-center gap-5'>
+        <Cart />
         <ThemeSwitcher />
         <ProfileDropdown />
         <MobileNavmenu navigationMenu={navigationMenu} />

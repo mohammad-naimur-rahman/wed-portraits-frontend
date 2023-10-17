@@ -84,6 +84,7 @@
   }
 
   .star-rating {
+    @apply mr-auto;
     .dv-star-rating-empty-star {
       color: var(--foreground) !important;
     }

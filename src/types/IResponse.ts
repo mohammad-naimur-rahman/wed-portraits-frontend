@@ -6,3 +6,7 @@ export interface IResponse<T> {
     limit: number
   }
 }
+
+export interface ISingleResponse<T> {
+  data: T
+}
