@@ -1,12 +1,14 @@
 import RootLayout from '@/components/layout/RootLayout'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import Typography from '@/components/ui/typography'
-import { serviceCategoryArray } from '@/constants/dashboard/serviceCategoryArray'
+import HomepageHeader from '@/components/pages/homepage/HomepageHeader'
+import Overview from '@/components/pages/homepage/Overview'
+// import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 export default function Home() {
   return (
-    <RootLayout title='Homepage'>
-      <Typography variant='h2' className='py-8 text-center'>
+    <RootLayout title='Wed Portraits'>
+      <HomepageHeader />
+      <Overview />
+      {/* <Typography variant='h2' className='py-8 text-center'>
         All Services
       </Typography>
       <Tabs defaultValue='Wedding'>
@@ -19,11 +21,11 @@ export default function Home() {
             ))}
           </TabsList>
         </div>
-        <TabsContent value='Wedding'>{/* <WeddingServices /> */}</TabsContent>
+        <TabsContent value='Wedding'>hllo</TabsContent>
         <TabsContent value='Birthday'>Change your password here.</TabsContent>
         <TabsContent value='Anniversary'>Change your password here.</TabsContent>
         <TabsContent value='Others'>Change your password here.</TabsContent>
-      </Tabs>
+      </Tabs> */}
     </RootLayout>
   )
 }
