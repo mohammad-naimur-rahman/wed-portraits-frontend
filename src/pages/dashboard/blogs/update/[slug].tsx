@@ -86,7 +86,7 @@ function BlogUpdatePage({ userData }: Props) {
     if (isSuccess) {
       form.reset()
       setimage('')
-      toast.success('Blog Created Successfully!')
+      toast.success('Blog Updated Successfully!')
       push('/dashboard/blogs')
       setblogContent('')
       setblogTags([])
@@ -94,7 +94,7 @@ function BlogUpdatePage({ userData }: Props) {
   }, [isError, error, isSuccess, form, push])
 
   return (
-    <DashboardLayout title='Blogs | Dashboard' userRole={userData?.role} isError={isError} error={error}>
+    <DashboardLayout title={data?.data?.title || 'Edit Blog'} userRole={userData?.role} isError={isError} error={error}>
       <section className='p-5'>
         <Typography variant='h2' className='pb-8 text-center'>
           Update Blog

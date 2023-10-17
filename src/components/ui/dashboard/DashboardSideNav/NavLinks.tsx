@@ -19,7 +19,7 @@ export default function NavLinks({ userRole }: Props) {
           <Link href={link.href || '/'}>
             <span
               className={clsx('flex items-center gap-4 hover:underline py-4', {
-                'text-primary': pathname === link.href,
+                'text-primary': pathname.includes(link.href),
               })}>
               <span className='w-5 h-5'>{link.icon}</span>
               <span className='font-semibold'>{link.label}</span>
