@@ -2,6 +2,7 @@ import withAuth from '@/HOC/withAuth'
 import DashboardLayout from '@/components/layout/DashboardLayout'
 import AddNewImage from '@/components/pages/dashboard/gallery/AddNewImage'
 import NoContent from '@/components/ui/dashboard/common/NoContent'
+import Img from '@/components/ui/img'
 import { Skeleton } from '@/components/ui/skeleton'
 import Typography from '@/components/ui/typography'
 import { useGetAllGalleryQuery } from '@/redux/features/galleryApi'
@@ -32,9 +33,9 @@ function GalleryPage({ userData }: Props) {
             ))}
           </div>
         ) : null}
-        <div className='grid grid-cols-card gap-7'>
+        <div className='columns-3 space-y-5'>
           {gallery?.map(image => (
-            <p key={image?.id}>{image?.id}</p>
+            <Img src={image?.image} alt={image?.id} key={image?.id} />
           ))}
         </div>
       </section>

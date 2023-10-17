@@ -10,9 +10,12 @@ interface Props {
 export default function Overlay({ isOpen, animationData }: Props) {
   return (
     <div
-      className={cn('w-full min-h-screen flex items-center justify-center fixed left-0 top-0 backdrop-blur-md z-50', {
-        hidden: !isOpen,
-      })}>
+      className={cn(
+        'w-full min-h-screen flex items-center justify-center fixed left-0 top-0 backdrop-blur-md z-[100]',
+        {
+          hidden: !isOpen,
+        }
+      )}>
       <div className='max-w-md'>
         <Lottie options={lottieDefaultOptions(animationData)} />
       </div>
