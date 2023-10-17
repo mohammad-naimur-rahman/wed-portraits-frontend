@@ -1,4 +1,5 @@
 import RootLayout from '@/components/layout/RootLayout'
+import Gallery from '@/components/pages/homepage/Gallery'
 import HomepageHeader from '@/components/pages/homepage/HomepageHeader'
 import Overview from '@/components/pages/homepage/Overview'
 import Services from '@/components/pages/homepage/services/Services'
@@ -6,6 +7,7 @@ import ButtonExtended from '@/components/ui/buttonExtended'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import Typography from '@/components/ui/typography'
 import { serviceCategoryArray } from '@/constants/dashboard/serviceCategoryArray'
+import { IGallery } from '@/types/IGallery'
 import { IResponse } from '@/types/IResponse'
 import { IService } from '@/types/IService'
 import { fetcher } from '@/utils/fetcher'
@@ -20,6 +22,7 @@ interface Props {
   birthdayServices: IResponse<IService>
   otherServices: IResponse<IService>
   upcomingServices: IResponse<IService>
+  gallery: IResponse<IGallery>
 }
 
 export default function Home({
@@ -29,6 +32,7 @@ export default function Home({
   birthdayServices,
   otherServices,
   upcomingServices,
+  gallery,
 }: Props) {
   const allServices = services?.data
   const allWeddingServices = weddingServices?.data
@@ -36,6 +40,8 @@ export default function Home({
   const allBirthdayServices = birthdayServices?.data
   const allOtherServices = otherServices?.data
   const allUpcomingServices = upcomingServices?.data
+
+  const galleryPictures = gallery?.data
   return (
     <RootLayout title='Wed Portraits'>
       <HomepageHeader />
@@ -95,6 +101,8 @@ export default function Home({
           </ButtonExtended>
         </Link>
       </div>
+
+      <Gallery images={galleryPictures} />
     </RootLayout>
   )
 }
@@ -139,6 +147,7 @@ export async function getStaticProps() {
   const birthdayServices = await fetcher('services', qs(birthdayQuery))
   const otherServices = await fetcher('services', qs(othersQuery))
   const upcomingServices = await fetcher('services', qs(upcomingQuery))
+  const gallery = await fetcher('galleries')
   return {
     props: {
       services,
@@ -147,6 +156,7 @@ export async function getStaticProps() {
       birthdayServices,
       otherServices,
       upcomingServices,
+      gallery,
     },
     revalidate: 10,
   }
