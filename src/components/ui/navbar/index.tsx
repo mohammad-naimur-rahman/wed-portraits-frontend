@@ -22,7 +22,7 @@ const navigationMenu = [
 
 export default function Navbar() {
   return (
-    <nav className='flex items-center justify-between px-5 py-3 shadow-md h-16 fixed top-0 left-0 w-full gap-5 backdrop-blur-lg z-10'>
+    <nav className='flex items-center justify-between px-5 py-3 h-16 fixed top-0 left-0 w-full gap-5 backdrop-blur-lg z-10'>
       <Link href='/'>
         <Img src='/logo.png' alt="Reader's cafe" className='h-16 w-auto py-1' sizes='10vw' width={192} height={80} />
       </Link>

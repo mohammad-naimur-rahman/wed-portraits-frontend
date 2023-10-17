@@ -6,6 +6,6 @@ interface IServiceQueries {
   status: 'all' | 'active' | 'inactive' | 'upcoming'
   sortBy: 'createdAt'
   sortOrder: 'desc'
-  page: 1
-  limit: 10
+  page: number
+  limit: number
 }

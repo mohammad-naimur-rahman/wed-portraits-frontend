@@ -11,7 +11,7 @@ function Card({ imgSrc, title, description }: CardProps) {
   return (
     <div className='relative w-96'>
       <Img src={imgSrc} alt='Overview 1' />
-      <div className='w-full h-full object-cover absolute top-0 left-0 bg-black opacity-50' />
+      <div className='w-full h-full object-cover absolute top-0 left-0 backdrop-blur-sm bg-opacity-30 bg-black' />
       <div className='w-full h-full absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center flex-col p-5 text-center gap-4 text-white'>
         <Typography variant='h3'>{title}</Typography>
         <p>{description}</p>
@@ -44,7 +44,7 @@ export default function Overview() {
           description='Our work is a blend of passion, creativity, and professionalism. We approach each project with dedication, ensuring that every photograph tells a story.'
         />
         <Card
-          imgSrc='/homepage/overview2.jpg'
+          imgSrc='/homepage/overview3.jpg'
           title='Why Choose Us?'
           description="Our team's experience and commitment guarantee that your moments will be captured with the utmost care and attention to detail."
         />
