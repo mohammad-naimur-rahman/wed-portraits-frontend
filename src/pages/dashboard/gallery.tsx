@@ -1,8 +1,8 @@
 import withAuth from '@/HOC/withAuth'
 import DashboardLayout from '@/components/layout/DashboardLayout'
+import GalleryCard from '@/components/pages/dashboard/cards/GalleryCard'
 import AddNewImage from '@/components/pages/dashboard/gallery/AddNewImage'
 import NoContent from '@/components/ui/dashboard/common/NoContent'
-import Img from '@/components/ui/img'
 import { Skeleton } from '@/components/ui/skeleton'
 import Typography from '@/components/ui/typography'
 import { useGetAllGalleryQuery } from '@/redux/features/galleryApi'
@@ -33,9 +33,9 @@ function GalleryPage({ userData }: Props) {
             ))}
           </div>
         ) : null}
-        <div className='columns-3 space-y-5'>
+        <div className='columns-1 md:columns-2 lg:columns-3 2xl:columns-4 gap-5 space-y-5 break-inside-avoid-column'>
           {gallery?.map(image => (
-            <Img src={image?.image} alt={image?.id} key={image?.id} />
+            <GalleryCard key={image?.id} image={image} />
           ))}
         </div>
       </section>
