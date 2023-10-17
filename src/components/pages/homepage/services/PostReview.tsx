@@ -56,13 +56,14 @@ export default function PostReview({ serviceId, reviews, setreviews }: Props) {
     if (isSuccess) {
       form.reset()
       toast.success('Review Posted Successfully!')
-      setreviews([data?.data?.data as IReview, ...reviews])
+      setreviews([data?.data as IReview, ...reviews])
+      console.log(data.data)
     }
   }, [isError, error, isSuccess, form])
 
   return (
     <div className='space-y-4'>
-      <Typography variant='h4'>Post a review</Typography>
+      <Typography variant='h3'>Post a review</Typography>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className='flex flex-col gap-4'>
           <StarRatingComponent

@@ -3,6 +3,7 @@ import {
   Image as ImageIcon,
   Layers,
   ListTodo,
+  MessageCircle,
   ScrollText,
   Sticker,
   UserCog2,
@@ -24,6 +25,11 @@ export const AdminNavLinks = [
     label: 'Services',
     icon: <Layers />,
     href: '/dashboard/services',
+  },
+  {
+    label: 'Reviews',
+    icon: <MessageCircle />,
+    href: '/dashboard/reviews',
   },
   {
     label: 'Bookings',

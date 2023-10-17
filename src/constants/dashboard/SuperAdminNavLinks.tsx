@@ -3,6 +3,7 @@ import {
   Image as ImageIcon,
   Layers,
   ListTodo,
+  MessageCircle,
   ScrollText,
   ShieldCheck,
   Sticker,
@@ -30,6 +31,11 @@ export const SuperAdminNavLinks = [
     label: 'Services',
     icon: <Layers />,
     href: '/dashboard/services',
+  },
+  {
+    label: 'Reviews',
+    icon: <MessageCircle />,
+    href: '/dashboard/reviews',
   },
   {
     label: 'Bookings',

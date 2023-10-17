@@ -1,4 +1,5 @@
 import RootLayout from '@/components/layout/RootLayout'
+import AllReviews from '@/components/pages/homepage/services/AllReviews'
 import PostReview from '@/components/pages/homepage/services/PostReview'
 import Img from '@/components/ui/img'
 import Typography from '@/components/ui/typography'
@@ -26,11 +27,11 @@ export default function ServiceDetailsPage({ service: serviceData }: Props) {
           <Typography variant='h4'>Price: ${service?.price}</Typography>
         </div>
 
-        <Typography variant='h3'>Reviews</Typography>
-
         <PostReview serviceId={service?.id} reviews={reviews} setreviews={setreviews} />
+
+        <Typography variant='h3'>Reviews</Typography>
         {reviews?.length ? (
-          <p>Hello</p>
+          <AllReviews reviews={reviews} />
         ) : (
           <p className='text-xl italic font-light text-secondary-foreground'>No reviews yet</p>
         )}

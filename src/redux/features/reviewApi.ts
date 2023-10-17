@@ -4,12 +4,16 @@ const rootApi = '/reviews'
 
 const reviewApi = api.injectEndpoints({
   endpoints: build => ({
-    // getAllGallery: build.query({
-    //   query: () => ({
-    //     url: rootApi,
-    //   }),
-    //   providesTags: ['galleries'],
-    // }),
+    getAllReviews: build.query({
+      query: token => ({
+        url: rootApi,
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }),
+      providesTags: ['reviews'],
+    }),
     createReview: build.mutation({
       query: ({ payload, token }) => ({
         url: rootApi,
@@ -19,29 +23,19 @@ const reviewApi = api.injectEndpoints({
           Authorization: `Bearer ${token}`,
         },
       }),
+      invalidatesTags: ['reviews'],
     }),
-    // updateGallery: build.mutation({
-    //   query: ({ id, token, payload }) => ({
-    //     url: `${rootApi}/${id}`,
-    //     method: 'PATCH',
-    //     body: payload,
-    //     headers: {
-    //       Authorization: `Bearer ${token}`,
-    //     },
-    //   }),
-    //   invalidatesTags: ['galleries'],
-    // }),
-    // deleteGallery: build.mutation({
-    //   query: ({ id, token }) => ({
-    //     url: `${rootApi}/${id}`,
-    //     method: 'DELETE',
-    //     headers: {
-    //       Authorization: `Bearer ${token}`,
-    //     },
-    //   }),
-    //   invalidatesTags: ['galleries'],
-    // }),
+    deleteReview: build.mutation({
+      query: ({ id, token }) => ({
+        url: `${rootApi}/${id}`,
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }),
+      invalidatesTags: ['reviews'],
+    }),
   }),
 })
 
-export const { useCreateReviewMutation } = reviewApi
+export const { useCreateReviewMutation, useGetAllReviewsQuery, useDeleteReviewMutation } = reviewApi
