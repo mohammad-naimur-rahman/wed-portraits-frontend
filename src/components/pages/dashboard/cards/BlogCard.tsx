@@ -49,7 +49,7 @@ export default function BlogCard({ blog }: Props) {
 
       <div className='flex flex-col gap-1 p-3 pt-5'>
         <div className='flex justify-between flex-wrap gap-3'>
-          <Link href={`/dashboard/blogs/${blog?.id}`}>
+          <Link href={`/dashboard/blogs/update/${blog?.slug}`}>
             <ButtonExtended icon={<PenSquare />} size='sm'>
               Edit Blog
             </ButtonExtended>

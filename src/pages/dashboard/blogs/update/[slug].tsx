@@ -1,5 +1,5 @@
 import withAuth from '@/HOC/withAuth'
-import animationData from '@/assets/lottie/savingFile.json'
+import animationData from '@/assets/lottie/updating.json'
 import DashboardLayout from '@/components/layout/DashboardLayout'
 import BlogTags from '@/components/pages/dashboard/blogs/BlogTags'
 import ButtonExtended from '@/components/ui/buttonExtended'
@@ -8,7 +8,8 @@ import { Form, FormControl, FormField, FormItem, FormMessage } from '@/component
 import { Input } from '@/components/ui/input'
 import Overlay from '@/components/ui/overlay'
 import Typography from '@/components/ui/typography'
-import { useCreateBlogMutation } from '@/redux/features/blogsApi'
+import { useGetBlogQuery, useUpdateBlogMutation } from '@/redux/features/blogsApi'
+import { IBlog } from '@/types/IBlog'
 import { IError } from '@/types/IError'
 import { IUser } from '@/types/IUser'
 import { getAccessToken } from '@/utils/auth/getAccessToken'
@@ -30,23 +31,35 @@ interface Props {
   userData: IUser
 }
 
-function BlogCreatePage({ userData }: Props) {
-  const { push } = useRouter()
-  const [createBlog, { isLoading, isError, error, isSuccess }] = useCreateBlogMutation()
+function BlogUpdatePage({ userData }: Props) {
+  const { push, query } = useRouter()
+  const { data } = useGetBlogQuery(query?.slug)
+
+  const updateBlogSchema = z.object({
+    title: z.string().optional(),
+  })
+
+  const [updateBlog, { isLoading, isError, error, isSuccess }] = useUpdateBlogMutation()
+
+  const form = useForm<z.infer<typeof updateBlogSchema>>({
+    resolver: zodResolver(updateBlogSchema),
+  })
+
+  useEffect(() => {
+    if (data) {
+      const blogData: IBlog = data?.data
+      setimage(blogData?.image)
+      setblogContent(blogData?.content)
+      setblogTags(blogData?.tags)
+      form.setValue('title', blogData?.title)
+    }
+  }, [data, form])
 
   const [image, setimage] = useState('')
   const [blogContent, setblogContent] = useState('')
   const [blogTags, setblogTags] = useState<string[]>([])
 
-  const createBlogSchema = z.object({
-    title: z.string(),
-  })
-
-  const form = useForm<z.infer<typeof createBlogSchema>>({
-    resolver: zodResolver(createBlogSchema),
-  })
-
-  const onSubmit = (values: z.infer<typeof createBlogSchema>) => {
+  const onSubmit = (values: z.infer<typeof updateBlogSchema>) => {
     if (!image) {
       toast.error('Image is required')
       return
@@ -57,7 +70,11 @@ function BlogCreatePage({ userData }: Props) {
       return
     }
 
-    createBlog({ payload: { ...values, image, content: blogContent, tags: blogTags }, token: getAccessToken() })
+    updateBlog({
+      id: data?.data?.id,
+      payload: { ...values, image, content: blogContent, tags: blogTags },
+      token: getAccessToken(),
+    })
   }
 
   useEffect(() => {
@@ -80,7 +97,7 @@ function BlogCreatePage({ userData }: Props) {
     <DashboardLayout title='Blogs | Dashboard' userRole={userData?.role} isError={isError} error={error}>
       <section className='p-5'>
         <Typography variant='h2' className='pb-8 text-center'>
-          Create Blog
+          Update Blog
         </Typography>
 
         <Form {...form}>
@@ -105,7 +122,7 @@ function BlogCreatePage({ userData }: Props) {
             <BlogTags blogTags={blogTags} setblogTags={setblogTags} />
 
             <ButtonExtended icon={<FilePlus />} className='self-end'>
-              Create Blog
+              Update Blog
             </ButtonExtended>
           </form>
         </Form>
@@ -116,4 +133,4 @@ function BlogCreatePage({ userData }: Props) {
   )
 }
 
-export default withAuth(BlogCreatePage)
+export default withAuth(BlogUpdatePage)
