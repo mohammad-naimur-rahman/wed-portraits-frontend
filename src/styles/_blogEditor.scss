@@ -1,11 +1,15 @@
 .blog-toolbar {
   background: hsl(var(--background)) !important;
-  padding: 5px 0 !important;
-  border: none !important;
-  @apply rounded-lg;
+  padding: 9px 0 !important;
+  @apply rounded-lg flex border-b shadow-sm;
 
   & > * {
     margin: 0 8px !important;
+    @apply flex;
+  }
+
+  .rdw-block-dropdown {
+    min-width: 100px;
   }
 
   .rdw-option-wrapper {
@@ -14,7 +18,7 @@
     height: 35px;
     margin: 1px;
     border: none !important;
-    @apply rounded-md;
+    @apply rounded-md flex items-center justify-center cursor-pointer;
 
     &:hover {
       box-shadow: none !important;
@@ -42,7 +46,7 @@
 
   .rdw-dropdown-wrapper {
     background: hsl(var(--muted)) !important;
-    @apply rounded-md border-0;
+    @apply rounded-md border-0 flex items-center justify-center px-2 relative;
 
     &:hover {
       box-shadow: none !important;
@@ -50,6 +54,12 @@
 
     .rdw-dropdown-optionwrapper {
       background: hsl(var(--background)) !important;
+      position: absolute;
+      @apply border top-full left-0 rounded-md;
+
+      .rdw-dropdownoption-default {
+        @apply px-2.5;
+      }
     }
 
     .rdw-dropdownoption-active,
@@ -74,7 +84,7 @@
 
 .blog-editor {
   box-sizing: border-box;
-  height: calc(100vh - 210px) !important;
+  height: calc(100dvh - 210px) !important;
   @apply rounded-lg;
 }
 

@@ -1,4 +1,5 @@
 import animationData from '@/assets/lottie/imageUploading.json'
+import { cn } from '@/lib/utils'
 import { IError } from '@/types/IError'
 import { errorMessage } from '@/utils/error'
 import { imageUploader } from '@/utils/form/imageUploader'
@@ -13,9 +14,10 @@ import Overlay from '../../overlay'
 interface Props {
   image: string
   setimage: Dispatch<SetStateAction<string>>
+  imageClassName?: string
 }
 
-export default function ImageUploaderComponent({ image, setimage }: Props) {
+export default function ImageUploaderComponent({ image, setimage, imageClassName }: Props) {
   const [isLoading, setisLoading] = useState(false)
   const hadleImageUpload = async (e: ChangeEvent<HTMLInputElement>) => {
     try {
@@ -33,7 +35,14 @@ export default function ImageUploaderComponent({ image, setimage }: Props) {
     <>
       {image ? (
         <div className='flex w-full items-center gap-5 py-5'>
-          <Img src={image} alt='Image' className='max-w-xs h-auto' sizes='20vw' width={300} height={300} />
+          <Img
+            src={image}
+            alt='Image'
+            className={cn(imageClassName, 'max-w-xs h-auto')}
+            sizes='20vw'
+            width={300}
+            height={300}
+          />
           <Button size='icon' variant='ghost' onClick={() => setimage('')}>
             <X className='w-6 h-6' />
           </Button>

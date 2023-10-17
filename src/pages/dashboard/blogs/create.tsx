@@ -1,6 +1,8 @@
 import withAuth from '@/HOC/withAuth'
 import animationData from '@/assets/lottie/savingFile.json'
 import DashboardLayout from '@/components/layout/DashboardLayout'
+import BlogTags from '@/components/pages/dashboard/blogs/BlogTags'
+import ButtonExtended from '@/components/ui/buttonExtended'
 import ImageUploaderComponent from '@/components/ui/dashboard/common/ImageUploaderComponent'
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
@@ -12,7 +14,9 @@ import { IUser } from '@/types/IUser'
 import { getAccessToken } from '@/utils/auth/getAccessToken'
 import { errorMessage } from '@/utils/error'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { FilePlus } from 'lucide-react'
 import dynamic from 'next/dynamic'
+import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
@@ -27,14 +31,15 @@ interface Props {
 }
 
 function BlogCreatePage({ userData }: Props) {
+  const { push } = useRouter()
   const [createBlog, { isLoading, isError, error, isSuccess }] = useCreateBlogMutation()
 
   const [image, setimage] = useState('')
   const [blogContent, setblogContent] = useState('')
+  const [blogTags, setblogTags] = useState<string[]>([])
 
   const createServiceSchema = z.object({
     title: z.string(),
-    tags: z.string().array(),
   })
 
   const form = useForm<z.infer<typeof createServiceSchema>>({
@@ -47,7 +52,12 @@ function BlogCreatePage({ userData }: Props) {
       return
     }
 
-    createBlog({ payload: { ...values, image }, token: getAccessToken() })
+    if (!blogContent) {
+      toast.error('Blog Content is required')
+      return
+    }
+
+    createBlog({ payload: { ...values, image, content: blogContent, tags: blogTags }, token: getAccessToken() })
   }
 
   useEffect(() => {
@@ -59,7 +69,8 @@ function BlogCreatePage({ userData }: Props) {
     if (isSuccess) {
       form.reset()
       setimage('')
-      toast.success('Service Created Successfully!')
+      toast.success('Blog Created Successfully!')
+      push('/dashboard/blogs')
     }
   }, [isError, error, isSuccess, form])
 
@@ -85,9 +96,15 @@ function BlogCreatePage({ userData }: Props) {
               )}
             />
 
-            <ImageUploaderComponent image={image} setimage={setimage} />
+            <ImageUploaderComponent image={image} setimage={setimage} imageClassName='!max-w-md' />
 
             <BlogEditor blogContent={blogContent} setblogContent={setblogContent} />
+
+            <BlogTags blogTags={blogTags} setblogTags={setblogTags} />
+
+            <ButtonExtended icon={<FilePlus />} className='self-end'>
+              Create Blog
+            </ButtonExtended>
           </form>
         </Form>
       </section>

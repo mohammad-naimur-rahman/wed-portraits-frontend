@@ -34,14 +34,13 @@ export default function BlogEditor({ blogContent, setblogContent }: Props) {
   return (
     <div className={styles.blogEditor}>
       <Editor
-        // className='border'
         editorState={editorState}
         wrapperClassName='blog-wrapper'
         editorClassName='blog-editor'
         toolbarClassName='blog-toolbar'
         onEditorStateChange={onEditorStateChange}
         toolbar={{
-          options: ['inline', 'blockType', 'fontSize', 'list', 'textAlign', 'link', 'embedded', 'image', 'history'],
+          options: ['inline', 'blockType', 'fontSize', 'list', 'textAlign', 'history'],
           inline: {
             inDropdown: false,
             options: ['bold', 'italic', 'underline', 'strikethrough'],

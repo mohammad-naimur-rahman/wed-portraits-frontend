@@ -1,9 +1,11 @@
 import withAuth from '@/HOC/withAuth'
 import DashboardLayout from '@/components/layout/DashboardLayout'
+import BlogCard from '@/components/pages/dashboard/cards/BlogCard'
 import ButtonExtended from '@/components/ui/buttonExtended'
 import NoContent from '@/components/ui/dashboard/common/NoContent'
 import Typography from '@/components/ui/typography'
 import { useGetAllBlogsQuery } from '@/redux/features/blogsApi'
+import { IBlog } from '@/types/IBlog'
 import { IUser } from '@/types/IUser'
 import { FilePlus } from 'lucide-react'
 import Link from 'next/link'
@@ -14,7 +16,7 @@ interface Props {
 
 function BlogsPage({ userData }: Props) {
   const { data, isLoading, isError, error } = useGetAllBlogsQuery(undefined)
-  const blogs = data?.data
+  const blogs: IBlog[] = data?.data
   return (
     <DashboardLayout title='Blogs | Dashboard' userRole={userData?.role} isError={isError} error={error}>
       <section className='p-5'>
@@ -25,6 +27,12 @@ function BlogsPage({ userData }: Props) {
           </Link>
         </div>
       </section>
+
+      <div className='grid grid-cols-card'>
+        {blogs?.map(blog => (
+          <BlogCard key={blog.id} blog={blog} />
+        ))}
+      </div>
       <NoContent isLoading={isLoading} data={data} content='Blog' />
     </DashboardLayout>
   )
