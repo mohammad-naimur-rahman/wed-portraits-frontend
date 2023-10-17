@@ -87,7 +87,7 @@ export default function UpdateService({ service }: Props) {
             Edit Service
           </ButtonExtended>
         </DialogTrigger>
-        <DialogContent className='max-w-2xl'>
+        <DialogContent className='max-w-2xl overflow-auto max-h-[calc(100dvh_-_20px)]'>
           <DialogHeader>
             <DialogTitle>Update Service</DialogTitle>
           </DialogHeader>

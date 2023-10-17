@@ -71,8 +71,10 @@ function BlogCreatePage({ userData }: Props) {
       setimage('')
       toast.success('Blog Created Successfully!')
       push('/dashboard/blogs')
+      setblogContent('')
+      setblogTags([])
     }
-  }, [isError, error, isSuccess, form])
+  }, [isError, error, isSuccess, form, push])
 
   return (
     <DashboardLayout title='Blogs | Dashboard' userRole={userData?.role} isError={isError} error={error}>

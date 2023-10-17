@@ -1,6 +1,5 @@
-import clsx from 'clsx'
+import { cn } from '@/lib/utils'
 import { ButtonHTMLAttributes, ReactNode } from 'react'
-import { twMerge } from 'tailwind-merge'
 import { Button } from './button'
 import Spinner from './icons/Spinner'
 
@@ -12,6 +11,7 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   size?: 'default' | 'sm' | 'lg' | 'icon'
   iconPosition?: 'left' | 'right'
   disabled?: boolean
+  className?: string
 }
 
 export default function ButtonExtended({
@@ -22,13 +22,14 @@ export default function ButtonExtended({
   size = 'default',
   iconPosition = 'left',
   disabled,
+  className,
   ...rest
 }: Props) {
   return (
     <Button
       {...rest}
       disabled={isLoading || disabled}
-      className={twMerge(clsx('min-w-[150px]'))}
+      className={cn('min-w-[150px]', className)}
       variant={variant}
       size={size}>
       <div className='flex items-center gap-2'>

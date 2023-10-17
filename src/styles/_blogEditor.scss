@@ -85,7 +85,7 @@
 .blog-editor {
   box-sizing: border-box;
   height: calc(100dvh - 210px) !important;
-  @apply rounded-lg;
+  @apply rounded-lg overflow-auto;
 }
 
 .blog-wrapper {

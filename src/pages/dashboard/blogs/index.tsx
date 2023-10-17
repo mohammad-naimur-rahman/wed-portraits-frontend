@@ -26,13 +26,13 @@ function BlogsPage({ userData }: Props) {
             <ButtonExtended icon={<FilePlus />}>Add New Blog</ButtonExtended>
           </Link>
         </div>
-      </section>
 
-      <div className='grid grid-cols-card'>
-        {blogs?.map(blog => (
-          <BlogCard key={blog.id} blog={blog} />
-        ))}
-      </div>
+        <div className='grid grid-cols-card gap-7'>
+          {blogs?.map(blog => (
+            <BlogCard key={blog.id} blog={blog} />
+          ))}
+        </div>
+      </section>
       <NoContent isLoading={isLoading} data={data} content='Blog' />
     </DashboardLayout>
   )

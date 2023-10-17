@@ -80,7 +80,7 @@ export default function AddNewService() {
             Add New Service
           </ButtonExtended>
         </DialogTrigger>
-        <DialogContent className='max-w-2xl'>
+        <DialogContent className='max-w-2xl overflow-auto max-h-[calc(100dvh_-_20px)]'>
           <DialogHeader>
             <DialogTitle>Add New Service</DialogTitle>
           </DialogHeader>
