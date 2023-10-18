@@ -1,5 +1,6 @@
 import { cn } from '@/lib/utils'
 import { ReactNode } from 'react'
+import Footer from '../ui/footer'
 import Navbar from '../ui/navbar'
 import EmptyLayout from './EmptyLayout'
 
@@ -15,6 +16,7 @@ export default function RootLayout({ title, meta, children, className }: Props) 
     <EmptyLayout title={title} meta={meta}>
       <Navbar />
       <main className={cn(className, 'h-min-body mt-16 min-h-screen-nav')}>{children}</main>
+      <Footer />
     </EmptyLayout>
   )
 }

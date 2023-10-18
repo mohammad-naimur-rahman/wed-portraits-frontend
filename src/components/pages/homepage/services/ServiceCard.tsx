@@ -28,14 +28,27 @@ export default function ServiceCard({ service }: Props) {
           {service?.description?.slice(0, 200)}...
         </Typography>
         <div className='flex justify-between p-3'>
-          <ButtonExtended
-            icon={<ShoppingCart />}
-            onClick={e => {
-              e.stopPropagation()
-              dispatch(addToCart(service?.id))
-            }}>
-            Add to cart
-          </ButtonExtended>
+          {service?.status === 'upcoming' ? (
+            <span className='opacity-0'>Can&apos;t book</span>
+          ) : (
+            <ButtonExtended
+              icon={<ShoppingCart />}
+              onClick={e => {
+                e.stopPropagation()
+                dispatch(
+                  addToCart({
+                    id: service?.id,
+                    title: service?.title,
+                    category: service?.category,
+                    image: service?.image,
+                    price: service?.price,
+                  })
+                )
+              }}>
+              Add to cart
+            </ButtonExtended>
+          )}
+
           <Typography variant='h4'>${service?.price}</Typography>
         </div>
       </div>
