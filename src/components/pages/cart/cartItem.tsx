@@ -22,9 +22,9 @@ export default function CartItem({ cartitem, setcartItems }: Props) {
     <div className='border rounded-md flex items-center justify-between overflow-hidden'>
       <div className='flex'>
         <Img src={service?.image} alt={service?.title} className='h-60 w-auto aspect-video object-cover' />
-        <div className='space-y-3 p-5'>
+        <div className='space-y-3 p-5 flex flex-col justify-center'>
           <Typography variant='h5'>{service?.title}</Typography>
-          <Button variant='outline' className='rounded-full'>
+          <Button variant='outline' className='rounded-full self-start'>
             {service?.category}
           </Button>
           <Typography variant='h3'>${service?.price}</Typography>

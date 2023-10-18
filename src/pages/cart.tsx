@@ -3,14 +3,19 @@ import RootLayout from '@/components/layout/RootLayout'
 import CartItem from '@/components/pages/cart/cartItem'
 import ButtonExtended from '@/components/ui/buttonExtended'
 import Typography from '@/components/ui/typography'
+import { envVars } from '@/configs'
 import { lottieDefaultOptions } from '@/constants/lottieDefaultOptions'
-import { ICartItem } from '@/redux/features/cartSlice'
-import { useAppSelector } from '@/redux/hooks'
+import { ICartItem, emptyCart } from '@/redux/features/cartSlice'
+import { useAppDispatch, useAppSelector } from '@/redux/hooks'
+import { IError } from '@/types/IError'
 import { getAccessToken } from '@/utils/auth/getAccessToken'
-import { BadgeDollarSign, FolderSearch } from 'lucide-react'
+import { errorMessage } from '@/utils/error'
+import axios from 'axios'
+import { Album, FolderSearch } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
+import toast from 'react-hot-toast'
 import Lottie from 'react-lottie'
 
 export interface IBookItem {
@@ -20,6 +25,7 @@ export interface IBookItem {
 
 export default function CartPage() {
   const { asPath } = useRouter()
+  const dispatch = useAppDispatch()
   const { cartArr } = useAppSelector(state => state.cart)
 
   const createInitialBookItem = (arr: ICartItem[]): IBookItem[] => {
@@ -42,8 +48,37 @@ export default function CartPage() {
     }
   }, [cartArr])
 
-  const bookServices = () => {
-    console.log(cartItems)
+  const createBookingRequest = async (item: IBookItem) => {
+    const payload = {
+      service: item.service.id,
+      date: new Date(item.date),
+      status: 'pending',
+    }
+    const result = await axios.post(`${envVars.API_URL}/bookings`, payload, {
+      headers: {
+        Authorization: `Bearer ${getAccessToken()}`,
+      },
+    })
+
+    if (result.status === 201) {
+      toast.success('Booking Successful')
+      dispatch(emptyCart())
+    }
+
+    return result
+  }
+
+  const requests = cartItems.map(item => () => createBookingRequest(item))
+
+  const bookServices = async () => {
+    try {
+      for (const request of requests) {
+        await request()
+      }
+    } catch (error) {
+      toast.error(errorMessage(error as IError))
+      console.log(error)
+    }
   }
 
   return (
@@ -78,12 +113,12 @@ export default function CartPage() {
           {cartItems?.length > 0 ? (
             <>
               {getAccessToken() ? (
-                <ButtonExtended icon={<BadgeDollarSign />} size='lg' onClick={bookServices}>
+                <ButtonExtended icon={<Album />} size='lg' onClick={bookServices}>
                   Book Services
                 </ButtonExtended>
               ) : (
                 <Link href={`/login?redirected=true&prevPath=${asPath}`}>
-                  <ButtonExtended icon={<BadgeDollarSign />} size='lg'>
+                  <ButtonExtended icon={<Album />} size='lg'>
                     Login to Book Services
                   </ButtonExtended>
                 </Link>
