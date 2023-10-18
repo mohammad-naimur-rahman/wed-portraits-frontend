@@ -58,9 +58,6 @@ export default function ProfileDropdown() {
         {userData?.id ? (
           <>
             <DropdownMenuGroup>
-              <DropdownMenuItem className='flex flex-col gap-2 items-start focus:bg-background'>
-                <h1>Hello</h1>
-              </DropdownMenuItem>
               <Link href='/dashboard/profile'>
                 <DropdownMenuItem className='cursor-pointer'>
                   <LayoutDashboard className='w-4 h-4 mr-2' />
