@@ -40,8 +40,7 @@ export default function ServiceDetailsPage({ service: serviceData }: Props) {
   )
 }
 
-export async function getServerSideProps(ctx: any) {
-  const { params } = ctx
+export async function getServerSideProps({ params }: any) {
   const service = await fetcher(`services/${params?.id}`)
   return {
     props: {

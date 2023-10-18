@@ -1,5 +1,7 @@
 import RootLayout from '@/components/layout/RootLayout'
 import Blogs from '@/components/pages/homepage/Blogs'
+import Faq from '@/components/pages/homepage/Faq'
+import FeedbackSection from '@/components/pages/homepage/FeedbackSection'
 import Gallery from '@/components/pages/homepage/Gallery'
 import HomepageHeader from '@/components/pages/homepage/HomepageHeader'
 import Overview from '@/components/pages/homepage/Overview'
@@ -10,6 +12,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import Typography from '@/components/ui/typography'
 import { serviceCategoryArray } from '@/constants/dashboard/serviceCategoryArray'
 import { IBlog } from '@/types/IBlog'
+import { IFaq } from '@/types/IFaq'
 import { IGallery } from '@/types/IGallery'
 import { IResponse } from '@/types/IResponse'
 import { IReview } from '@/types/IReview'
@@ -29,6 +32,7 @@ interface Props {
   gallery: IResponse<IGallery>
   testimonials: IResponse<IReview>
   blogs: IResponse<IBlog>
+  faqs: IResponse<IFaq>
 }
 
 export default function Home({
@@ -41,6 +45,7 @@ export default function Home({
   gallery,
   testimonials,
   blogs,
+  faqs,
 }: Props) {
   const allServices = services?.data
   const allWeddingServices = weddingServices?.data
@@ -52,6 +57,7 @@ export default function Home({
   const galleryPictures = gallery?.data
   const allTestimonials = testimonials?.data
   const allBlogs = blogs?.data
+  const allFaqs = faqs?.data
 
   return (
     <RootLayout title='Wed Portraits'>
@@ -116,6 +122,8 @@ export default function Home({
       <Gallery images={galleryPictures} />
       <Testimonials testimonials={allTestimonials} />
       <Blogs blogs={allBlogs} />
+      <Faq faqs={allFaqs} />
+      <FeedbackSection />
     </RootLayout>
   )
 }
@@ -141,6 +149,7 @@ export async function getStaticProps() {
   const gallery = await fetcher('galleries')
   const testimonials = await fetcher('reviews/testimonials')
   const blogs = await fetcher('blogs', qs(blogQuery))
+  const faqs = await fetcher('faqs')
   return {
     props: {
       services,
@@ -152,7 +161,8 @@ export async function getStaticProps() {
       gallery,
       testimonials,
       blogs,
+      faqs,
     },
-    revalidate: 10,
+    revalidate: 60,
   }
 }
