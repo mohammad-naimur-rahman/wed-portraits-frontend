@@ -13,7 +13,7 @@ export default function Footer() {
         className='w-full h-full object-cover absolute top-1/2 transform -translate-y-1/2 left-0 -z-20'
         sizes='100vw'
       />
-      <div className='w-full h-full object-cover absolute top-0 left-0 text-white bg-gradient-to-r from-[rgba(0,0,0,0.3)] to-[rgba(0,0,0,1)] -z-10' />
+      <div className='w-full h-full object-cover absolute top-0 left-0 text-white bg-gradient-to-r from-[rgba(0,0,0,0.3)] to-[rgba(0,0,0,0.8)] -z-10' />
 
       <div className='text-white max-w-4xl ml-auto p-10 z-10 flex flex-col h-full justify-end gap-10'>
         <div className='flex gap-10'>

@@ -20,9 +20,10 @@ interface Props {
   query: IServiceQueries
   setquery: Dispatch<SetStateAction<IServiceQueries>>
   setqueryString: Dispatch<SetStateAction<string>>
+  isFromDashboard?: boolean
 }
 
-export default function ServiceFilterFields({ query, setquery, setqueryString }: Props) {
+export default function ServiceFilterFields({ query, setquery, setqueryString, isFromDashboard = true }: Props) {
   const initCategoryValues = serviceCategoryArray.map(categry => ({ value: categry, label: categry }))
 
   const categoryValues = [
@@ -106,28 +107,30 @@ export default function ServiceFilterFields({ query, setquery, setqueryString }:
         </SelectContent>
       </Select>
 
-      <Select
-        value={query.status}
-        onValueChange={value =>
-          setquery({
-            ...query,
-            status: value as IServiceQueries['status'],
-          })
-        }>
-        <SelectTrigger className='w-max min-w-[120px]'>
-          <SelectValue placeholder='Status' />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectGroup className='overflow-auto max-h-[50dvh]'>
-            <SelectLabel>Status</SelectLabel>
-            {statusValues?.map(({ label, value }) => (
-              <SelectItem key={value} value={value}>
-                {label}
-              </SelectItem>
-            ))}
-          </SelectGroup>
-        </SelectContent>
-      </Select>
+      {isFromDashboard ? (
+        <Select
+          value={query.status}
+          onValueChange={value =>
+            setquery({
+              ...query,
+              status: value as IServiceQueries['status'],
+            })
+          }>
+          <SelectTrigger className='w-max min-w-[120px]'>
+            <SelectValue placeholder='Status' />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup className='overflow-auto max-h-[50dvh]'>
+              <SelectLabel>Status</SelectLabel>
+              {statusValues?.map(({ label, value }) => (
+                <SelectItem key={value} value={value}>
+                  {label}
+                </SelectItem>
+              ))}
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+      ) : null}
 
       <Select
         value={query.sortBy}
