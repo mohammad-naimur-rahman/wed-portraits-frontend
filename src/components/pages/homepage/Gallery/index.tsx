@@ -8,7 +8,7 @@ interface Props {
 
 export default function Gallery({ images }: Props) {
   return (
-    <section className='container'>
+    <section className='container py-10'>
       <Typography className='text-center pt-8 pb-4' variant='h1'>
         Image Gallery
       </Typography>

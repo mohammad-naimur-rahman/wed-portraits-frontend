@@ -2,6 +2,7 @@ import RootLayout from '@/components/layout/RootLayout'
 import Gallery from '@/components/pages/homepage/Gallery'
 import HomepageHeader from '@/components/pages/homepage/HomepageHeader'
 import Overview from '@/components/pages/homepage/Overview'
+import Testimonials from '@/components/pages/homepage/Testimonials'
 import Services from '@/components/pages/homepage/services/Services'
 import ButtonExtended from '@/components/ui/buttonExtended'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
@@ -9,6 +10,7 @@ import Typography from '@/components/ui/typography'
 import { serviceCategoryArray } from '@/constants/dashboard/serviceCategoryArray'
 import { IGallery } from '@/types/IGallery'
 import { IResponse } from '@/types/IResponse'
+import { IReview } from '@/types/IReview'
 import { IService } from '@/types/IService'
 import { fetcher } from '@/utils/fetcher'
 import { qs } from '@/utils/form/qs'
@@ -23,6 +25,7 @@ interface Props {
   otherServices: IResponse<IService>
   upcomingServices: IResponse<IService>
   gallery: IResponse<IGallery>
+  testimonials: IResponse<IReview>
 }
 
 export default function Home({
@@ -33,6 +36,7 @@ export default function Home({
   otherServices,
   upcomingServices,
   gallery,
+  testimonials,
 }: Props) {
   const allServices = services?.data
   const allWeddingServices = weddingServices?.data
@@ -42,6 +46,9 @@ export default function Home({
   const allUpcomingServices = upcomingServices?.data
 
   const galleryPictures = gallery?.data
+
+  const allTestimonials = testimonials?.data
+
   return (
     <RootLayout title='Wed Portraits'>
       <HomepageHeader />
@@ -103,6 +110,8 @@ export default function Home({
       </div>
 
       <Gallery images={galleryPictures} />
+
+      <Testimonials testimonials={allTestimonials} />
     </RootLayout>
   )
 }
@@ -148,6 +157,7 @@ export async function getStaticProps() {
   const otherServices = await fetcher('services', qs(othersQuery))
   const upcomingServices = await fetcher('services', qs(upcomingQuery))
   const gallery = await fetcher('galleries')
+  const testimonials = await fetcher('reviews/testimonials')
   return {
     props: {
       services,
@@ -157,6 +167,7 @@ export async function getStaticProps() {
       otherServices,
       upcomingServices,
       gallery,
+      testimonials,
     },
     revalidate: 10,
   }
