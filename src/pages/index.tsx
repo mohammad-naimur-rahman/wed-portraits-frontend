@@ -1,13 +1,15 @@
 import RootLayout from '@/components/layout/RootLayout'
+import Blogs from '@/components/pages/homepage/Blogs'
 import Gallery from '@/components/pages/homepage/Gallery'
 import HomepageHeader from '@/components/pages/homepage/HomepageHeader'
 import Overview from '@/components/pages/homepage/Overview'
 import Testimonials from '@/components/pages/homepage/Testimonials'
-import Services from '@/components/pages/homepage/services/Services'
+import Services from '@/components/pages/homepage/services'
 import ButtonExtended from '@/components/ui/buttonExtended'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import Typography from '@/components/ui/typography'
 import { serviceCategoryArray } from '@/constants/dashboard/serviceCategoryArray'
+import { IBlog } from '@/types/IBlog'
 import { IGallery } from '@/types/IGallery'
 import { IResponse } from '@/types/IResponse'
 import { IReview } from '@/types/IReview'
@@ -26,6 +28,7 @@ interface Props {
   upcomingServices: IResponse<IService>
   gallery: IResponse<IGallery>
   testimonials: IResponse<IReview>
+  blogs: IResponse<IBlog>
 }
 
 export default function Home({
@@ -37,6 +40,7 @@ export default function Home({
   upcomingServices,
   gallery,
   testimonials,
+  blogs,
 }: Props) {
   const allServices = services?.data
   const allWeddingServices = weddingServices?.data
@@ -46,8 +50,8 @@ export default function Home({
   const allUpcomingServices = upcomingServices?.data
 
   const galleryPictures = gallery?.data
-
   const allTestimonials = testimonials?.data
+  const allBlogs = blogs?.data
 
   return (
     <RootLayout title='Wed Portraits'>
@@ -110,45 +114,23 @@ export default function Home({
       </div>
 
       <Gallery images={galleryPictures} />
-
       <Testimonials testimonials={allTestimonials} />
+      <Blogs blogs={allBlogs} />
     </RootLayout>
   )
 }
 
 export async function getStaticProps() {
-  const allQuery = {
-    status: 'active',
-    page: 1,
-    limit: 4,
-    sortBy: 'createdAt',
-    sortOrder: 'desc',
-  }
-
-  const weddingQuery = {
-    ...allQuery,
-    category: 'Wedding',
-  }
-
-  const anniversaryQuery = {
-    ...allQuery,
-    category: 'Anniversary',
-  }
-
-  const birthdayQuery = {
-    ...allQuery,
-    category: 'Birthday',
-  }
-
-  const othersQuery = {
-    ...allQuery,
-    category: 'Others',
-  }
-
+  const allQuery = { status: 'active', page: 1, limit: 4, sortBy: 'createdAt', sortOrder: 'desc' }
+  const weddingQuery = { ...allQuery, category: 'Wedding' }
+  const anniversaryQuery = { ...allQuery, category: 'Anniversary' }
+  const birthdayQuery = { ...allQuery, category: 'Birthday' }
+  const othersQuery = { ...allQuery, category: 'Others' }
   const upcomingQuery = {
     status: 'upcoming',
     limit: 4,
   }
+  const blogQuery = { limit: 4 }
 
   const services = await fetcher('services', qs(allQuery))
   const weddingServices = await fetcher('services', qs(weddingQuery))
@@ -158,6 +140,7 @@ export async function getStaticProps() {
   const upcomingServices = await fetcher('services', qs(upcomingQuery))
   const gallery = await fetcher('galleries')
   const testimonials = await fetcher('reviews/testimonials')
+  const blogs = await fetcher('blogs', qs(blogQuery))
   return {
     props: {
       services,
@@ -168,6 +151,7 @@ export async function getStaticProps() {
       upcomingServices,
       gallery,
       testimonials,
+      blogs,
     },
     revalidate: 10,
   }

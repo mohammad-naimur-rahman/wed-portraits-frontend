@@ -5,8 +5,8 @@ const rootApi = '/blogs'
 const blogsApi = api.injectEndpoints({
   endpoints: build => ({
     getAllBlogs: build.query({
-      query: () => ({
-        url: rootApi,
+      query: query => ({
+        url: query ? `${rootApi}/${query}` : rootApi,
       }),
       providesTags: ['blogs'],
     }),

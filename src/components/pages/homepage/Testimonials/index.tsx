@@ -9,7 +9,6 @@ interface Props {
 }
 
 export default function Testimonials({ testimonials }: Props) {
-  console.log(testimonials)
   return (
     <section className='container'>
       <Typography className='text-center pt-8 pb-4' variant='h1'>
@@ -24,7 +23,6 @@ export default function Testimonials({ testimonials }: Props) {
         grabCursor
         centeredSlides
         slidesPerView='auto'
-        // loop
         spaceBetween={50}
         pagination={{
           clickable: true,
