@@ -81,7 +81,6 @@ export default function CartPage() {
       }
     } catch (error) {
       toast.error(errorMessage(error as IError))
-      console.log(error)
     }
   }
 

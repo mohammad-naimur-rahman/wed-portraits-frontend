@@ -48,7 +48,6 @@ export default function LoginForm({ query }: Props) {
         }
       }
     } catch (err) {
-      console.log(err)
       setIsLoading(false)
       toast.error(errorMessage(err as IError))
     }

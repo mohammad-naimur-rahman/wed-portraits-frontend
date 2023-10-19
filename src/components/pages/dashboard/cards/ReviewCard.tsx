@@ -19,8 +19,6 @@ interface Props {
 export default function ReviewCard({ review }: Props) {
   const [deleteReview, { isError, error, isSuccess }] = useDeleteReviewMutation()
 
-  console.log(isSuccess)
-
   useEffect(() => {
     if (isError) toast.error(errorMessage(error as IError))
     if (isSuccess) toast.success('Review Deleted Successfully!')

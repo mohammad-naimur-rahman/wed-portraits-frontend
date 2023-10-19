@@ -34,7 +34,7 @@ export default function MyBookingCard({ booking }: Props) {
 
   return (
     <div className='border rounded-md flex flex-col xl:flex-row items-center justify-between overflow-hidden bg-secondary'>
-      <div className='flex flex-col lg:flex-row'>
+      <div className='flex flex-col lg:flex-row w-full'>
         <Img
           src={service?.image}
           alt={service?.title}

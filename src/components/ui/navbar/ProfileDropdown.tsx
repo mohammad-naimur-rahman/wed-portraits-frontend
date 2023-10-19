@@ -24,8 +24,6 @@ export default function ProfileDropdown() {
 
   const [userData, setuserData] = useState<ICookieUser>(userParsed || initUserData)
 
-  console.log(userData)
-
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>

@@ -57,7 +57,6 @@ export default function PostReview({ serviceId, reviews, setreviews }: Props) {
       form.reset()
       toast.success('Review Posted Successfully!')
       setreviews([data?.data as IReview, ...reviews])
-      console.log(data.data)
     }
   }, [isError, error, isSuccess, form])
 
