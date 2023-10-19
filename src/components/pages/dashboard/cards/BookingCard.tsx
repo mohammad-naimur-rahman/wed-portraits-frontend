@@ -2,10 +2,11 @@ import ButtonExtended from '@/components/ui/buttonExtended'
 import ConfirmationPrompt from '@/components/ui/dashboard/common/ConfirmationPrompt'
 import Img from '@/components/ui/img'
 import Typography from '@/components/ui/typography'
-import { useDeleteBookingMutation, useUpdateBookingMutation } from '@/redux/features/bookingApi'
+import { useDeleteBookingMutation } from '@/redux/features/bookingApi'
 import { IBooking } from '@/types/IBooking'
 import { IError } from '@/types/IError'
 import { IService } from '@/types/IService'
+import { IUser } from '@/types/IUser'
 import { getAccessToken } from '@/utils/auth/getAccessToken'
 import { errorMessage } from '@/utils/error'
 import { transformRole } from '@/utils/transformRole'
@@ -14,6 +15,7 @@ import { Trash2 } from 'lucide-react'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
+import UpdateBooking from '../bookings/UpdateBooking'
 
 interface Props {
   booking: IBooking
@@ -21,21 +23,18 @@ interface Props {
 
 export default function BookingCard({ booking }: Props) {
   const service = booking?.service as IService
+  const user = booking?.user as IUser
 
   const [showPrompt, setshowPrompt] = useState(false)
   const [deleteId, setdeleteId] = useState<string | null>(null)
 
-  const [cancelBooking, { isError, isSuccess, error }] = useUpdateBookingMutation()
   const [deleteBooking, { isError: isDeleteError, isSuccess: isDeleteSuccess, error: deleteError }] =
     useDeleteBookingMutation()
 
   useEffect(() => {
-    if (isError) toast.error(errorMessage(error as IError))
-    if (isSuccess) toast.success('Booking Cancelled Successfully')
-
     if (isDeleteError) toast.error(errorMessage(deleteError as IError))
     if (isDeleteSuccess) toast.success('Booking Deleted Successfully')
-  }, [isError, error, isSuccess, isDeleteError, deleteError, isDeleteSuccess])
+  }, [isDeleteError, deleteError, isDeleteSuccess])
 
   return (
     <div className='border rounded-md flex items-center justify-between overflow-hidden bg-secondary'>
@@ -47,9 +46,10 @@ export default function BookingCard({ booking }: Props) {
               {service?.title}
             </Typography>
           </Link>
-          <Typography variant='h5' className='pt-1'>
-            Category: {service?.category}
-          </Typography>
+          <div className='flex gap-5 items-center'>
+            <Typography variant='h5'>Category: {service?.category}</Typography>
+            <Typography variant='h5'>Client: {user?.name}</Typography>
+          </div>
           <div className='flex items-center gap-8'>
             <Typography variant='h3' className='font-semibold'>
               ${service?.price}
@@ -57,20 +57,21 @@ export default function BookingCard({ booking }: Props) {
             <Typography variant='h5'>Event date: {format(new Date(booking?.date), 'dd MMM yyyy')}</Typography>
           </div>
           <Typography variant='h5'>Status: {transformRole(booking?.status)}</Typography>
-        </div>
-      </div>
 
-      <div className='p-5 flex flex-col'>
-        <ButtonExtended
-          icon={<Trash2 />}
-          size='default'
-          variant='destructive'
-          onClick={() => {
-            setdeleteId(booking?.id)
-            setshowPrompt(true)
-          }}>
-          Delete Booking
-        </ButtonExtended>
+          <div className='flex gap-3 flex-wrap'>
+            <UpdateBooking booking={booking} />
+            <ButtonExtended
+              icon={<Trash2 />}
+              size='sm'
+              variant='destructive'
+              onClick={() => {
+                setdeleteId(booking?.id)
+                setshowPrompt(true)
+              }}>
+              Delete Booking
+            </ButtonExtended>
+          </div>
+        </div>
       </div>
 
       <ConfirmationPrompt

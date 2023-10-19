@@ -19,6 +19,11 @@ const bookingsApi = api.injectEndpoints({
         url: `${rootApi}/dates/${serviceId}`,
       }),
     }),
+    getHasTakenService: build.query({
+      query: ({ serviceId, userId }) => ({
+        url: `${rootApi}/has-taken/${serviceId}/${userId}`,
+      }),
+    }),
     createBooking: build.mutation({
       query: ({ payload, token }) => ({
         url: rootApi,
@@ -57,6 +62,7 @@ const bookingsApi = api.injectEndpoints({
 export const {
   useGetAllBookingsQuery,
   useGetBookingDatesQuery,
+  useGetHasTakenServiceQuery,
   useCreateBookingMutation,
   useUpdateBookingMutation,
   useDeleteBookingMutation,

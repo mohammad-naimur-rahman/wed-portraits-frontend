@@ -22,7 +22,7 @@ function AllBookingsPage({ userData }: Props) {
     <DashboardLayout title='My Bookings | Dashboard' userRole={userData?.role} error={error} isError={isError}>
       <section className='p-5'>
         <Typography className='pt-3 pb-8' variant='h2'>
-          My Bookings
+          All Bookings
         </Typography>
 
         {isLoading ? (

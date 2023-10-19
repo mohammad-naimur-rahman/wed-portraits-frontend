@@ -6,7 +6,6 @@ interface Props {
 }
 
 export default function AllReviews({ reviews }: Props) {
-  console.log(reviews)
   return (
     <div>
       {reviews?.map(review => (

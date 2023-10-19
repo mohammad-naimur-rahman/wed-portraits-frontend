@@ -5,8 +5,10 @@ import ServiceCard from '@/components/pages/homepage/services/ServiceCard'
 import ButtonExtended from '@/components/ui/buttonExtended'
 import Img from '@/components/ui/img'
 import Typography from '@/components/ui/typography'
+import { useGetHasTakenServiceQuery } from '@/redux/features/bookingApi'
 import { IResponse, ISingleResponse } from '@/types/IResponse'
 import { IService } from '@/types/IService'
+import { getUserId } from '@/utils/auth/getUserId'
 import { fetcher } from '@/utils/fetcher'
 import { qs } from '@/utils/form/qs'
 import { FolderSearch } from 'lucide-react'
@@ -25,6 +27,9 @@ export default function ServiceDetailsPage({ service: serviceData, otherServices
 
   const [reviews, setreviews] = useState(service?.reviews)
 
+  const { data } = useGetHasTakenServiceQuery({ serviceId: service?.id, userId: getUserId() })
+  const canComment = data?.data?.length > 0
+
   return (
     <RootLayout title={service?.title}>
       <main>
@@ -39,7 +44,7 @@ export default function ServiceDetailsPage({ service: serviceData, otherServices
             <Typography variant='h4'>Price: ${service?.price}</Typography>
           </div>
 
-          <PostReview serviceId={service?.id} reviews={reviews} setreviews={setreviews} />
+          {canComment ? <PostReview serviceId={service?.id} reviews={reviews} setreviews={setreviews} /> : null}
 
           <Typography variant='h3'>Reviews</Typography>
           {reviews?.length ? (
