@@ -17,7 +17,7 @@ interface Props {
   services: IResponse<IService>
 }
 
-const initQuery: IServiceQueries = {
+export const initQuery: IServiceQueries = {
   ...initServiceQueries,
   status: 'active',
 }

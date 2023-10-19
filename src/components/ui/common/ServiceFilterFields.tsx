@@ -10,6 +10,7 @@ import {
 } from '@/components/ui/select'
 import { serviceCategoryArray } from '@/constants/dashboard/serviceCategoryArray'
 import { initServiceQueries } from '@/constants/initServiceQueries'
+import { initQuery } from '@/pages/services'
 import { qs } from '@/utils/form/qs'
 import { Eraser, Search } from 'lucide-react'
 import { Dispatch, FormEvent, SetStateAction } from 'react'
@@ -53,7 +54,7 @@ export default function ServiceFilterFields({ query, setquery, setqueryString, i
   ]
 
   const clearFields = () => {
-    setquery(initServiceQueries)
+    setquery(isFromDashboard ? initServiceQueries : initQuery)
     setqueryString('')
   }
 
@@ -70,7 +71,7 @@ export default function ServiceFilterFields({ query, setquery, setqueryString, i
         placeholder='🔍  Search with title'
         className='max-w-xs'
         value={query.search}
-        onChange={e => setquery({ ...query, search: e.target.value })}
+        onChange={e => setquery({ ...query, search: e.target.value, page: 1 })}
       />
 
       <RangeSlider
@@ -80,7 +81,7 @@ export default function ServiceFilterFields({ query, setquery, setqueryString, i
         minDistance={200}
         value={[query.minPrice, query.maxPrice]}
         onAfterChange={value => {
-          setquery({ ...query, minPrice: value[0], maxPrice: value[1] })
+          setquery({ ...query, minPrice: value[0], maxPrice: value[1], page: 1 })
         }}
       />
 
@@ -90,6 +91,7 @@ export default function ServiceFilterFields({ query, setquery, setqueryString, i
           setquery({
             ...query,
             category: value as IServiceQueries['category'],
+            page: 1,
           })
         }>
         <SelectTrigger className='w-max min-w-[120px]'>
@@ -114,6 +116,7 @@ export default function ServiceFilterFields({ query, setquery, setqueryString, i
             setquery({
               ...query,
               status: value as IServiceQueries['status'],
+              page: 1,
             })
           }>
           <SelectTrigger className='w-max min-w-[120px]'>
@@ -138,6 +141,7 @@ export default function ServiceFilterFields({ query, setquery, setqueryString, i
           setquery({
             ...query,
             sortBy: value as unknown as IServiceQueries['sortBy'],
+            page: 1,
           })
         }>
         <SelectTrigger className='w-max min-w-[120px]'>
@@ -161,6 +165,7 @@ export default function ServiceFilterFields({ query, setquery, setqueryString, i
           setquery({
             ...query,
             sortOrder: value as unknown as IServiceQueries['sortOrder'],
+            page: 1,
           })
         }>
         <SelectTrigger className='w-max min-w-[120px]'>
