@@ -11,6 +11,8 @@ import { errorMessage } from '@/utils/error'
 import { signupZSchema } from '@/validation/auth/signupZSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import axios from 'axios'
+import { ArrowLeft } from 'lucide-react'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -127,6 +129,26 @@ export default function SignupForm({ query }: Props) {
           </Button>
         </form>
       </Form>
+
+      <p className='flex items-center justify-center py-3'>
+        Already have an account?
+        {query?.redirected ? (
+          <Link href={`/login?redirected=${query.redirected}&prevPath=${query.prevPath}`}>
+            <Button variant='link'>Login</Button>
+          </Link>
+        ) : (
+          <Link href='/login'>
+            <Button variant='link'>Login</Button>
+          </Link>
+        )}
+      </p>
+      <div className='flex pb-3 justify-center'>
+        <Link href='/'>
+          <Button variant='secondary'>
+            <ArrowLeft className='w-4 h-4 mr-2' /> Go back home
+          </Button>
+        </Link>
+      </div>
     </section>
   )
 }

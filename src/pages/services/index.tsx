@@ -59,7 +59,7 @@ export default function ServicesPage({ services }: Props) {
           </div>
         ) : null}
 
-        <div className='grid grid-cols-2'>
+        <div className='grid grid-cols-1 md:grid-cols-2'>
           {allServices?.map(service => (
             <ServiceCard key={service.id} service={service} />
           ))}

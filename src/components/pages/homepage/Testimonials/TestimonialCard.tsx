@@ -8,7 +8,7 @@ interface Props {
 
 export default function TestimonialCard({ testimonial }: Props) {
   return (
-    <div className='space-y-3 p-3 text-center h-[400px] border rounded-md shadow-lg bg-secondary'>
+    <div className='space-y-3 p-3 text-center min-h-[400px] border rounded-md shadow-lg bg-secondary'>
       <div className='mx-auto w-20 h-20 rounded-full'>
         {testimonial?.user?.image ? (
           <Img

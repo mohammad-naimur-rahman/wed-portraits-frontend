@@ -37,7 +37,7 @@ export default function BlogDetailsPage({ blog: blogData, otherBlogs }: Props) {
           Other Blogs
         </Typography>
 
-        <div className='grid grid-cols-2 container'>
+        <div className='grid grid-cols-1 md:grid-cols-2 container'>
           {allOtherBlogs?.map(blog => (
             <BlogCard key={blog?.id} blog={blog} />
           ))}

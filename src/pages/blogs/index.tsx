@@ -21,7 +21,7 @@ export default function Blogs({ blogs }: Props) {
           Read Our Blogs
         </Typography>
 
-        <div className='grid grid-cols-2'>
+        <div className='grid grid-cols-1 md:grid-cols-2'>
           {allBlogs?.map(blog => (
             <BlogCard key={blog?.id} blog={blog} />
           ))}
