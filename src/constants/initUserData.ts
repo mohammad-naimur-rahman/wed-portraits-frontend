@@ -1,3 +1,4 @@
+import { ENUM_USER_ROLE } from '@/enum/userRolesEum'
 import { ICookieUser } from '@/types/ICookieUser'
 
 export const initUserData: ICookieUser = {
@@ -5,4 +6,5 @@ export const initUserData: ICookieUser = {
   name: '',
   email: '',
   image: '',
+  role: ENUM_USER_ROLE.USER,
 }
