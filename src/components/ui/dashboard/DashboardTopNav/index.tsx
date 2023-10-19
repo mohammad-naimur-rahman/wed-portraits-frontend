@@ -3,7 +3,6 @@ import Link from 'next/link'
 import { Dispatch, SetStateAction } from 'react'
 import { Button } from '../../button'
 import { ThemeSwitcher } from '../../navbar/ThemeSwitcher'
-import DashboardSearchBox from './DashboardSearchBox'
 
 interface Props {
   setopen: Dispatch<SetStateAction<boolean>>
@@ -17,7 +16,6 @@ export default function DashboardTopNav({ setopen }: Props) {
           <ArrowLeft className='w-5 h-5 mr-2' /> Go back home
         </Button>
       </Link>
-      <DashboardSearchBox />
       <div className='flex items-center w-[152px] justify-end gap-4'>
         <ThemeSwitcher className='text-right' />
         <AlignJustify onClick={() => setopen(prev => !prev)} className='block lg:hidden cursor-pointer' />

@@ -33,9 +33,13 @@ export default function MyBookingCard({ booking }: Props) {
   }, [isError, error, isSuccess])
 
   return (
-    <div className='border rounded-md flex items-center justify-between overflow-hidden bg-secondary'>
-      <div className='flex'>
-        <Img src={service?.image} alt={service?.title} className='h-60 w-auto aspect-video object-cover' />
+    <div className='border rounded-md flex flex-col xl:flex-row items-center justify-between overflow-hidden bg-secondary'>
+      <div className='flex flex-col lg:flex-row'>
+        <Img
+          src={service?.image}
+          alt={service?.title}
+          className='w-full h-auto lg:h-60 lg:w-auto aspect-video object-cover'
+        />
         <div className='space-y-3 p-5 flex flex-col justify-center'>
           <Link href={`/services/${service?.id}`}>
             <Typography variant='h5' className='text-primary'>

@@ -38,19 +38,23 @@ export default function BookingCard({ booking }: Props) {
 
   return (
     <div className='border rounded-md flex items-center justify-between overflow-hidden bg-secondary'>
-      <div className='flex'>
-        <Img src={service?.image} alt={service?.title} className='h-60 w-auto aspect-video object-cover' />
+      <div className='flex flex-col lg:flex-row items-start lg:items-center w-full'>
+        <Img
+          src={service?.image}
+          alt={service?.title}
+          className='h-auto lg:h-60 w-full lg:w-auto aspect-video object-cover'
+        />
         <div className='space-y-3 p-5 flex flex-col justify-center'>
           <Link href={`/services/${service?.id}`}>
             <Typography variant='h5' className='text-primary'>
               {service?.title}
             </Typography>
           </Link>
-          <div className='flex gap-5 items-center'>
+          <div className='flex gap-5 items-center flex-wrap'>
             <Typography variant='h5'>Category: {service?.category}</Typography>
             <Typography variant='h5'>Client: {user?.name}</Typography>
           </div>
-          <div className='flex items-center gap-8'>
+          <div className='flex items-center gap-8 flex-wrap'>
             <Typography variant='h3' className='font-semibold'>
               ${service?.price}
             </Typography>
