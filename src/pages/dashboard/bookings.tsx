@@ -1,6 +1,6 @@
 import withAuth from '@/HOC/withAuth'
 import DashboardLayout from '@/components/layout/DashboardLayout'
-import MyBookingCard from '@/components/pages/dashboard/cards/MyBookingCard'
+import BookingCard from '@/components/pages/dashboard/cards/BookingCard'
 import NoContent from '@/components/ui/dashboard/common/NoContent'
 import { Skeleton } from '@/components/ui/skeleton'
 import Typography from '@/components/ui/typography'
@@ -14,7 +14,7 @@ interface Props {
   userData: IUser
 }
 
-function MyBookingsPage({ userData }: Props) {
+function AllBookingsPage({ userData }: Props) {
   const { data, isLoading, error, isError } = useGetAllBookingsQuery(getAccessToken())
   const bookings: IBooking[] = data?.data
 
@@ -24,6 +24,7 @@ function MyBookingsPage({ userData }: Props) {
         <Typography className='pt-3 pb-8' variant='h2'>
           My Bookings
         </Typography>
+
         {isLoading ? (
           <div className='flex flex-col gap-5 w-full'>
             {Array.from({ length: 5 }).map((_, i) => (
@@ -33,7 +34,7 @@ function MyBookingsPage({ userData }: Props) {
         ) : (
           <div className='space-y-5'>
             {bookings?.map(booking => (
-              <MyBookingCard key={booking?.id} booking={booking} />
+              <BookingCard key={booking?.id} booking={booking} />
             ))}
           </div>
         )}
@@ -44,4 +45,4 @@ function MyBookingsPage({ userData }: Props) {
   )
 }
 
-export default withAuth(MyBookingsPage)
+export default withAuth(AllBookingsPage)

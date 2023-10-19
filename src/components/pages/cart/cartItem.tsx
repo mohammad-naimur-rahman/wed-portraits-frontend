@@ -10,12 +10,12 @@ import { Dispatch, SetStateAction } from 'react'
 import SelectDate from './SelectDate'
 
 interface Props {
-  cartitem: IBookItem
+  cartItem: IBookItem
   setcartItems: Dispatch<SetStateAction<IBookItem[]>>
 }
 
-export default function CartItem({ cartitem, setcartItems }: Props) {
-  const service = cartitem?.service
+export default function CartItem({ cartItem, setcartItems }: Props) {
+  const service = cartItem?.service
 
   const dispatch = useAppDispatch()
 
@@ -33,9 +33,7 @@ export default function CartItem({ cartitem, setcartItems }: Props) {
             {service?.category}
           </Button>
           <Typography variant='h3'>${service?.price}</Typography>
-          <SelectDate currentDate={cartitem?.date} service={service} setcartItems={setcartItems} />
-
-          {/* <DatePicker form={form} name='date' /> */}
+          <SelectDate cartItem={cartItem} service={service} setcartItems={setcartItems} />
         </div>
       </div>
 

@@ -2,6 +2,7 @@ import animationData from '@/assets/lottie/empty.json'
 import RootLayout from '@/components/layout/RootLayout'
 import CartItem from '@/components/pages/cart/cartItem'
 import ButtonExtended from '@/components/ui/buttonExtended'
+import ConfirmationPrompt from '@/components/ui/dashboard/common/ConfirmationPrompt'
 import Typography from '@/components/ui/typography'
 import { envVars } from '@/configs'
 import { lottieDefaultOptions } from '@/constants/lottieDefaultOptions'
@@ -24,7 +25,7 @@ export interface IBookItem {
 }
 
 export default function CartPage() {
-  const { asPath } = useRouter()
+  const { push, asPath } = useRouter()
   const dispatch = useAppDispatch()
   const { cartArr } = useAppSelector(state => state.cart)
 
@@ -38,6 +39,8 @@ export default function CartPage() {
   }
 
   const [cartItems, setcartItems] = useState<IBookItem[]>([])
+
+  const [showPrompt, setshowPrompt] = useState(false)
 
   useEffect(() => {
     if (cartArr?.length) {
@@ -63,6 +66,7 @@ export default function CartPage() {
     if (result.status === 201) {
       toast.success('Booking Successful')
       dispatch(emptyCart())
+      push('/dashboard/my-bookings')
     }
 
     return result
@@ -91,7 +95,7 @@ export default function CartPage() {
         {cartItems?.length > 0 ? (
           <div className='space-y-5'>
             {cartItems?.map(cartitem => (
-              <CartItem key={cartitem?.service?.id} cartitem={cartitem} setcartItems={setcartItems} />
+              <CartItem key={cartitem?.service?.id} cartItem={cartitem} setcartItems={setcartItems} />
             ))}
           </div>
         ) : (
@@ -113,7 +117,7 @@ export default function CartPage() {
           {cartItems?.length > 0 ? (
             <>
               {getAccessToken() ? (
-                <ButtonExtended icon={<Album />} size='lg' onClick={bookServices}>
+                <ButtonExtended icon={<Album />} size='lg' onClick={() => setshowPrompt(true)}>
                   Book Services
                 </ButtonExtended>
               ) : (
@@ -127,6 +131,13 @@ export default function CartPage() {
           ) : null}
         </div>
       </section>
+      <ConfirmationPrompt
+        open={showPrompt}
+        onOpenChange={setshowPrompt}
+        cb={() => {
+          bookServices()
+        }}
+      />
     </RootLayout>
   )
 }

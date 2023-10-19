@@ -53,6 +53,7 @@ const cartSlice = createSlice({
     },
     emptyCart: state => {
       state.cartArr = []
+      setCookie('cart', JSON.stringify([]))
     },
   },
 })
