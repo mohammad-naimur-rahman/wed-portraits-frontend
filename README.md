@@ -2,7 +2,7 @@
 
 ### It's a fullstack application using MERN stack and this is the frontend part of the application
 
-**Live Link**: https://wed-portraits-server.vercel.app/
+**Live Link**: https://wed-portraits.vercel.app/
 
 **Backend Repository**: https://github.com/mohammad-naimur-rahman/wed-portraits-server
 
