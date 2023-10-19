@@ -17,8 +17,9 @@ import { z } from 'zod'
 interface Props {
   email: string
   role: 'user' | 'admin' | 'super_admin'
+  disabled: boolean
 }
-export default function ChangeRole({ email, role }: Props) {
+export default function ChangeRole({ email, role, disabled }: Props) {
   const [changeRole, { isSuccess, isError, error }] = useChangeRoleMutation()
 
   const adminZSChema = z.object({
@@ -40,7 +41,7 @@ export default function ChangeRole({ email, role }: Props) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button>Change Role</Button>
+        <Button disabled={disabled}>Change Role</Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>

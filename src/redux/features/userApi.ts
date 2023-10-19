@@ -1,7 +1,6 @@
 import api from '@/redux/api/apiSlice'
 const rootApi = '/users'
 
-// TODO: add user login and signup api
 const userApi = api.injectEndpoints({
   endpoints: build => ({
     getProfile: build.query({
@@ -23,7 +22,7 @@ const userApi = api.injectEndpoints({
       }),
       providesTags: ['users'],
     }),
-    updateProfile: build.mutation({
+    updateUser: build.mutation({
       query: ({ id, payload, token }) => ({
         url: `${rootApi}/${id}`,
         method: 'PATCH',
@@ -32,7 +31,7 @@ const userApi = api.injectEndpoints({
           Authorization: `Bearer ${token}`,
         },
       }),
-      invalidatesTags: ['user'],
+      invalidatesTags: ['user', 'users'],
     }),
     changeRole: build.mutation({
       query: ({ email, role, token }) => ({
@@ -60,7 +59,7 @@ const userApi = api.injectEndpoints({
 
 export const {
   useGetProfileQuery,
-  useUpdateProfileMutation,
+  useUpdateUserMutation,
   useGetUsersQuery,
   useChangeRoleMutation,
   useDeleteUserMutation,

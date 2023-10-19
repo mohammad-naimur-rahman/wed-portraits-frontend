@@ -48,7 +48,7 @@ function AdminPage({ userData }: Props) {
                 <TableCell>{user?.email}</TableCell>
                 <TableCell> {transformRole(user?.role)}</TableCell>
                 <TableCell>
-                  {user?.role !== 'super_admin' ? <ChangeRole email={user?.email} role={user?.role} /> : null}
+                  <ChangeRole disabled={user?.role === 'super_admin'} email={user?.email} role={user?.role} />
                 </TableCell>
               </TableRow>
             ))}

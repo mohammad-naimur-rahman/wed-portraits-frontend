@@ -1,5 +1,6 @@
 import withAuth from '@/HOC/withAuth'
 import DashboardLayout from '@/components/layout/DashboardLayout'
+import UpdateUser from '@/components/pages/dashboard/users/UpdateUser'
 import { Button } from '@/components/ui/button'
 import ConfirmationPrompt from '@/components/ui/dashboard/common/ConfirmationPrompt'
 import { Skeleton } from '@/components/ui/skeleton'
@@ -56,6 +57,7 @@ function UsersPage({ userData }: Props) {
               <TableHead>Email</TableHead>
               <TableHead>Role</TableHead>
               <TableHead className='w-40'>Total Bookings</TableHead>
+              <TableHead>Update User</TableHead>
               <TableHead>Delete User</TableHead>
             </TableRow>
           </TableHeader>
@@ -67,17 +69,22 @@ function UsersPage({ userData }: Props) {
                 <TableCell> {transformRole(user?.role)}</TableCell>
                 <TableCell className='text-right'>{user?.bookings?.length}</TableCell>
                 <TableCell>
-                  {user?.role !== 'super_admin' && userDetails?.role === 'super_admin' ? (
-                    <Button
-                      variant={'destructive'}
-                      size='icon'
-                      onClick={() => {
-                        setdeleteUserId(user?.id)
-                        setshowDeletePromt(true)
-                      }}>
-                      <Trash2 />
-                    </Button>
-                  ) : null}
+                  <UpdateUser user={user} disabled={user?.role !== 'user'} />
+                </TableCell>
+                <TableCell>
+                  <Button
+                    variant={'destructive'}
+                    size='icon'
+                    disabled={
+                      user?.role === 'super_admin' &&
+                      (userDetails?.role === 'admin' || userDetails?.role === 'super_admin')
+                    }
+                    onClick={() => {
+                      setdeleteUserId(user?.id)
+                      setshowDeletePromt(true)
+                    }}>
+                    <Trash2 />
+                  </Button>
                 </TableCell>
               </TableRow>
             ))}

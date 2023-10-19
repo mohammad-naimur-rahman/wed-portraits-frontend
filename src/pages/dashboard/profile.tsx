@@ -5,7 +5,7 @@ import ProfileImage from '@/components/pages/dashboard/profile/ProfileImage'
 import TotalBookings from '@/components/pages/dashboard/profile/TotalBookings'
 import UserEmail from '@/components/pages/dashboard/profile/UserEmail'
 import UserRole from '@/components/pages/dashboard/profile/UserRole'
-import { useGetProfileQuery, useUpdateProfileMutation } from '@/redux/features/userApi'
+import { useGetProfileQuery, useUpdateUserMutation } from '@/redux/features/userApi'
 import { IError } from '@/types/IError'
 import { IUser } from '@/types/IUser'
 import { getAccessToken } from '@/utils/auth/getAccessToken'
@@ -22,7 +22,7 @@ function ProfilePage({ userData }: Props) {
   const { isLoading, isError, error, data } = useGetProfileQuery(token)
 
   const [updateProfile, { isSuccess: isUpdateSuccess, isError: isUpdateError, error: updateError }] =
-    useUpdateProfileMutation()
+    useUpdateUserMutation()
 
   const userDetails: IUser = data?.data
 

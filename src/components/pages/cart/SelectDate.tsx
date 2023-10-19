@@ -21,7 +21,7 @@ export default function SelectDate({ cartItem, service, setcartItems }: Props) {
   const currentDate = cartItem.date
 
   const { data } = useGetBookingDatesQuery(cartItem?.service?.id)
-  const forbiddenDays: Matcher[] = data?.data
+  const forbiddenDays: Matcher[] = data?.data?.map((date: string) => new Date(date))
 
   const setDateForService = (val: Date) => {
     setcartItems(prev => {
@@ -35,7 +35,7 @@ export default function SelectDate({ cartItem, service, setcartItems }: Props) {
   }
   return (
     <>
-      {forbiddenDays?.length ? (
+      {forbiddenDays ? (
         <Popover>
           <PopoverTrigger asChild>
             <Button
