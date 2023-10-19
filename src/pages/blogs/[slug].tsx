@@ -25,7 +25,7 @@ export default function BlogDetailsPage({ blog: blogData, otherBlogs }: Props) {
     <RootLayout title={blog?.title}>
       <main className='flex flex-col gap-10 p-5 mx-auto'>
         <div className='max-w-4xl mx-auto space-y-8'>
-          <Typography variant='h2' className='py-3'>
+          <Typography variant='h2' className='py-3 text-primary'>
             {blog?.title}
           </Typography>
           <Img src={blog?.image} alt={blog?.title} className='w-full h-auto' />

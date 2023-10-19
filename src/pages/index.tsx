@@ -129,12 +129,18 @@ export default function Home({
 }
 
 export async function getStaticProps() {
-  const allQuery = { status: 'active', page: 1, limit: 4, sortBy: 'createdAt', sortOrder: 'desc' }
-  const weddingQuery = { ...allQuery, category: 'Wedding' }
-  const anniversaryQuery = { ...allQuery, category: 'Anniversary' }
-  const birthdayQuery = { ...allQuery, category: 'Birthday' }
-  const othersQuery = { ...allQuery, category: 'Others' }
-  const upcomingQuery = {
+  const allQuery: Partial<IServiceQueries> = {
+    status: 'active',
+    page: 1,
+    limit: 4,
+    sortBy: 'createdAt',
+    sortOrder: 'desc',
+  }
+  const weddingQuery: Partial<IServiceQueries> = { ...allQuery, category: 'Wedding' }
+  const anniversaryQuery: Partial<IServiceQueries> = { ...allQuery, category: 'Anniversary' }
+  const birthdayQuery: Partial<IServiceQueries> = { ...allQuery, category: 'Birthday' }
+  const othersQuery: Partial<IServiceQueries> = { ...allQuery, category: 'Others' }
+  const upcomingQuery: Partial<IServiceQueries> = {
     status: 'upcoming',
     limit: 4,
   }

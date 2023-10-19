@@ -12,11 +12,13 @@ export default function BlogCard({ blog }: Props) {
   const { push } = useRouter()
   return (
     <div className='p-4'>
-      <div
-        className='shadow-lg rounded-lg bg-secondary overflow-hidden flex flex-col justify-between h-full gap-4 cursor-pointer'
-        onClick={() => push(`/blogs/${blog?.slug}`)}>
+      <div className='shadow-lg rounded-lg bg-secondary overflow-hidden flex flex-col justify-between h-full gap-4'>
         <Img src={blog?.image} alt={blog?.title} className='aspect-video object-cover' />
-        <Typography variant='h5' className='px-3 pt-2'>
+        <Typography
+          variant='h4'
+          className='px-3 pt-2 cursor-pointer text-primary'
+          // @ts-ignore
+          onClick={() => push(`/blogs/${blog?.slug}`)}>
           {blog?.title}
         </Typography>
 
