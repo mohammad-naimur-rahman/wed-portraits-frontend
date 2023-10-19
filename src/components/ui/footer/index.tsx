@@ -16,7 +16,7 @@ export default function Footer() {
       <div className='w-full h-full object-cover absolute top-0 left-0 text-white bg-gradient-to-r from-[rgba(0,0,0,0.3)] to-[rgba(0,0,0,0.8)] -z-10' />
 
       <div className='text-white max-w-4xl ml-auto p-10 z-10 flex flex-col h-full justify-end gap-10'>
-        <div className='flex gap-10'>
+        <div className='flex flex-col md:flex-row gap-10'>
           <Img src='/logo.png' alt='Wed portraits' className='h-28 w-auto self-center' />
 
           <div className='min-w-max space-y-5'>
@@ -34,7 +34,7 @@ export default function Footer() {
 
           <div className='min-w-max space-y-5'>
             <Typography variant='h3'>Follow Us</Typography>
-            <ul>
+            <ul className='flex flex-row md:flex-row'>
               {socialLinks.map(({ icon, href }) => (
                 <li key={href}>
                   <Button variant='link' size='icon' className='text-white text-lg underline'>

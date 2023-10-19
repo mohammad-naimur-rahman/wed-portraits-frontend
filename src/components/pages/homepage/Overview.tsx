@@ -9,10 +9,10 @@ interface CardProps {
 
 function Card({ imgSrc, title, description }: CardProps) {
   return (
-    <div className='relative w-96'>
-      <Img src={imgSrc} alt='Overview 1' />
-      <div className='w-full h-full object-cover absolute top-0 left-0 backdrop-blur-sm bg-opacity-30 bg-black' />
-      <div className='w-full h-full absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center flex-col p-5 text-center gap-4 text-white'>
+    <div className='w-full sm:w-2/3 min-[950px]:w-[300px] xl:w-[400px] h-[350px] xl:h-[300px] relative'>
+      <Img src={imgSrc} alt='Overview 1' className='w-full h-full object-cover absolute top-0 left-0' />
+      <div className='w-full h-full absolute top-0 left-0 bg-opacity-40 bg-black' />
+      <div className='w-full h-full transform absolute top-0 left-0 flex items-center justify-center flex-col p-5 text-center gap-4 text-white'>
         <Typography variant='h3'>{title}</Typography>
         <p>{description}</p>
       </div>
@@ -22,19 +22,17 @@ function Card({ imgSrc, title, description }: CardProps) {
 
 export default function Overview() {
   return (
-    <section className='min-h-[70vh] relative text-white'>
-      <Img
-        src='/homepage/overviewBg.jpg'
-        alt='We give quality photography service'
-        className='w-full h-full object-cover absolute top-0 left-0'
-      />
-      <div className='w-full h-full object-cover absolute top-0 left-0 bg-black bg-opacity-10 text-white' />
-      <Typography variant='h1' className='absolute left-1/2 transform -translate-x-1/2 top-16'>
-        Your Photography Experts
+    <section className='py-10'>
+      <Typography className='text-center pt-8 pb-4' variant='h1'>
+        Overview
       </Typography>
-      <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex'>
+      <Typography variant='h3' className='text-center pb-8'>
+        How We Work
+      </Typography>
+
+      <div className='flex flex-col min-[950px]:flex-row items-center justify-center'>
         <Card
-          imgSrc='/homepage/overview2.jpg'
+          imgSrc='/homepage/overview1.jpg'
           title='What Do We Do?'
           description='We are in the business of capturing the most precious moments of your life and turning them into timeless memories.'
         />

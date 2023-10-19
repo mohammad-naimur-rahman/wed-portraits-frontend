@@ -5,8 +5,8 @@ import Link from 'next/link'
 export default function HomepageHeader() {
   return (
     <header className='flex flex-col'>
-      <div className='h-[calc(50vh_-_32px)] flex'>
-        <div className='w-1/2 text-right flex flex-col justify-center items-end gap-5 p-10'>
+      <div className='lg:h-auto xl:h-[calc(50vh_-_32px)] flex flex-col lg:flex-row'>
+        <div className='w-full lg:w-1/2 text-right flex flex-col justify-center items-end gap-3 2xl:gap-5 p-7 2xl:p-10'>
           <Typography variant='h1'>Wed Portraits Photography</Typography>
           <Typography variant='h5'>Memories Preserved Forever</Typography>
           <Typography variant='body' className='w-3/4'>
@@ -19,15 +19,15 @@ export default function HomepageHeader() {
             </button>
           </Link>
         </div>
-        <div className='w-1/2'>
+        <div className='w-full lg:w-1/2'>
           <Img src='/homepage/header1.jpg' alt='Wed Portraits' className='w-full h-full object-cover' />
         </div>
       </div>
-      <div className='h-[calc(50vh_-_32px)] flex'>
-        <div className='w-1/2'>
+      <div className='lg:h-auto xl:h-[calc(50vh_-_32px)] flex flex-col lg:flex-row'>
+        <div className='w-full lg:w-1/2 order-2 lg:order-1'>
           <Img src='/homepage/header2.jpg' alt='Wed Portraits' className='w-full h-full object-cover' />
         </div>
-        <div className='w-1/2 text-left flex flex-col justify-center items-start gap-5 p-10'>
+        <div className='w-full lg:w-1/2 text-left flex flex-col justify-center items-start gap-3 2xl:gap-5 p-7 2xl:p-10 order-1 lg:order-2'>
           <Typography variant='h1'>Discover the World Through Our Lens</Typography>
           <Typography variant='h5'>Photography Beyond Borders</Typography>
           <Typography variant='body' className='w-3/4'>

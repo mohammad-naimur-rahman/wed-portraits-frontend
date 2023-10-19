@@ -7,7 +7,7 @@ interface Props {
 
 export default function Services({ services }: Props) {
   return (
-    <div className='grid grid-cols-2 container'>
+    <div className='grid grid-cols-1 md:grid-cols-2 container'>
       {services?.map(service => (
         <ServiceCard key={service.id} service={service} />
       ))}

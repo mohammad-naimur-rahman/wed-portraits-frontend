@@ -72,7 +72,7 @@ export default function Home({
       </Typography>
       <Tabs defaultValue='All Categories'>
         <div className='flex w-full justify-center'>
-          <TabsList className=''>
+          <TabsList>
             {['All Categories', ...serviceCategoryArray]?.map(category => (
               <TabsTrigger key={category} value={category}>
                 {category}

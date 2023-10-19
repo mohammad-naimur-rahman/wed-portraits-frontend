@@ -8,16 +8,16 @@ import { ThemeSwitcher } from './ThemeSwitcher'
 
 const navigationMenu = [
   {
-    href: '/all-services',
-    label: 'All Services',
+    href: '/',
+    label: 'Home',
   },
   {
-    href: '/categories/wedding',
-    label: 'Wedding',
+    href: '/services',
+    label: 'Services',
   },
   {
-    href: '/categories/anniversery',
-    label: 'Discussions',
+    href: '/blogs',
+    label: 'Blogs',
   },
 ]
 

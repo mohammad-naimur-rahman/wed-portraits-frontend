@@ -4,7 +4,6 @@ import Typography from '@/components/ui/typography'
 import { addToCart } from '@/redux/features/cartSlice'
 import { useAppDispatch } from '@/redux/hooks'
 import { IService } from '@/types/IService'
-import { getUserData } from '@/utils/auth/getUserData'
 import { ShoppingCart } from 'lucide-react'
 import { useRouter } from 'next/router'
 
@@ -37,7 +36,6 @@ export default function ServiceCard({ service }: Props) {
           ) : (
             <ButtonExtended
               icon={<ShoppingCart />}
-              disabled={getUserData()?.role !== 'user'}
               onClick={e => {
                 e.stopPropagation()
                 dispatch(
