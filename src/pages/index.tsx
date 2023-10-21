@@ -60,7 +60,7 @@ export default function Home({
   const allFaqs = faqs?.data
 
   return (
-    <RootLayout title='Wed Portraits'>
+    <RootLayout title='Wed Portraits | Homepage'>
       <HomepageHeader />
       <Overview />
 

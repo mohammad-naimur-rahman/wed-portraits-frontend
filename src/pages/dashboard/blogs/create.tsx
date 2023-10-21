@@ -77,7 +77,7 @@ function BlogCreatePage({ userData }: Props) {
   }, [isError, error, isSuccess, form, push])
 
   return (
-    <DashboardLayout title='Blogs | Dashboard' userRole={userData?.role} isError={isError} error={error}>
+    <DashboardLayout title='Create Blog | Dashboard' userRole={userData?.role} isError={isError} error={error}>
       <section className='p-5'>
         <Typography variant='h2' className='pb-8 text-center'>
           Create Blog
