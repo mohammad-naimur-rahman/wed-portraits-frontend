@@ -40,7 +40,7 @@ export default function BlogEditor({ blogContent, setblogContent }: Props) {
         toolbarClassName='blog-toolbar'
         onEditorStateChange={onEditorStateChange}
         toolbar={{
-          options: ['inline', 'blockType', 'fontSize', 'list', 'textAlign', 'history'],
+          options: ['inline', 'blockType', 'fontSize', 'list', 'history'],
           inline: {
             inDropdown: false,
             options: ['bold', 'italic', 'underline', 'strikethrough'],

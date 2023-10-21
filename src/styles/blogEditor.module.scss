@@ -33,4 +33,20 @@
   h6 {
     @apply text-lg font-semibold;
   }
+
+  ul {
+    list-style: disc;
+
+    li {
+      margin-left: 20px;
+    }
+  }
+
+  ol {
+    list-style: decimal;
+
+    li {
+      margin-left: 20px;
+    }
+  }
 }
