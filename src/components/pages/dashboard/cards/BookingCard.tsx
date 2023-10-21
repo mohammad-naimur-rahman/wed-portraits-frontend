@@ -68,6 +68,7 @@ export default function BookingCard({ booking }: Props) {
               icon={<Trash2 />}
               size='sm'
               variant='destructive'
+              disabled={booking?.status === 'ongoing' || booking?.status === 'confirmed'}
               onClick={() => {
                 setdeleteId(booking?.id)
                 setshowPrompt(true)

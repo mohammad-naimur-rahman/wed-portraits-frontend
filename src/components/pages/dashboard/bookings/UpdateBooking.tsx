@@ -13,7 +13,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { bookingStatusArr } from '@/constants/dashboard/bookingStatusArray'
 import { useUpdateBookingMutation } from '@/redux/features/bookingApi'
 import { IBooking } from '@/types/IBooking'
 import { IError } from '@/types/IError'
@@ -27,6 +26,7 @@ import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import { z } from 'zod'
+import { getUpdateStatusArr } from './utils'
 
 interface Props {
   booking: IBooking
@@ -67,7 +67,11 @@ export default function UpdateBooking({ booking }: Props) {
     <>
       <Dialog>
         <DialogTrigger asChild>
-          <ButtonExtended icon={<PenSquare />} className='min-w-[40px]' size='sm'>
+          <ButtonExtended
+            icon={<PenSquare />}
+            className='min-w-[40px]'
+            size='sm'
+            disabled={booking?.status === 'cancelled' || booking?.status === 'fulfilled'}>
             Update Booking
           </ButtonExtended>
         </DialogTrigger>
@@ -91,7 +95,7 @@ export default function UpdateBooking({ booking }: Props) {
                         <SelectContent>
                           <SelectGroup>
                             <SelectLabel>Choose Role</SelectLabel>
-                            {bookingStatusArr.map(status => (
+                            {getUpdateStatusArr(booking?.status).map(status => (
                               <SelectItem value={status} key={status}>
                                 {transformRole(status)}
                               </SelectItem>
