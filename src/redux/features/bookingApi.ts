@@ -5,8 +5,8 @@ const rootApi = '/bookings'
 const bookingsApi = api.injectEndpoints({
   endpoints: build => ({
     getAllBookings: build.query({
-      query: token => ({
-        url: rootApi,
+      query: ({ query, token }) => ({
+        url: query ? `${rootApi}?${query}` : rootApi,
         method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,
