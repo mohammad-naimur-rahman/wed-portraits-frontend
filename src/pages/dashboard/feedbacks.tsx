@@ -35,7 +35,7 @@ function FeedbackPage({ userData }: Props) {
   }, [isDeleteError, deleteError, isSuccess])
 
   return (
-    <DashboardLayout title='Services | Dashboard' userRole={userData?.role} isError={isError} error={error}>
+    <DashboardLayout title='Feedbacks | Dashboard' userRole={userData?.role} isError={isError} error={error}>
       <section className='p-5'>
         <div className='flex justify-between items-center pb-5'>
           <Typography variant='h2'>All Feedbacks</Typography>

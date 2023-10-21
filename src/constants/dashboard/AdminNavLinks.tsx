@@ -37,12 +37,12 @@ export const AdminNavLinks = [
     href: '/dashboard/bookings',
   },
   {
-    label: 'Feedback',
+    label: 'Feedbacks',
     icon: <Sticker />,
     href: '/dashboard/feedbacks',
   },
   {
-    label: 'Blog',
+    label: 'Blogs',
     icon: <ScrollText />,
     href: '/dashboard/blogs',
   },

@@ -10,19 +10,24 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { initUserData } from '@/constants/initUserData'
-import { ICookieUser } from '@/types/ICookieUser'
-import { getCookie } from 'cookies-next'
+import { useGetProfileQuery } from '@/redux/features/userApi'
+import { getAccessToken } from '@/utils/auth/getAccessToken'
 import { LayoutDashboard, LogIn } from 'lucide-react'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Img from '../img'
 import LogoutButton from './LogoutButton'
 
 export default function ProfileDropdown() {
-  const user = getCookie('userData')
-  const userParsed: ICookieUser = user ? JSON.parse(user) : {}
+  const { data } = useGetProfileQuery(getAccessToken())
 
-  const [userData, setuserData] = useState<ICookieUser>(userParsed || initUserData)
+  const [userData, setuserData] = useState(initUserData)
+
+  useEffect(() => {
+    if (data?.data) {
+      setuserData(data.data)
+    }
+  }, [data])
 
   return (
     <DropdownMenu>

@@ -19,7 +19,7 @@ function AllBookingsPage({ userData }: Props) {
   const bookings: IBooking[] = data?.data
 
   return (
-    <DashboardLayout title='My Bookings | Dashboard' userRole={userData?.role} error={error} isError={isError}>
+    <DashboardLayout title='All Bookings | Dashboard' userRole={userData?.role} error={error} isError={isError}>
       <section className='p-5'>
         <Typography className='pt-3 pb-8' variant='h2'>
           All Bookings
