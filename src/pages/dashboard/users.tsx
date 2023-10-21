@@ -3,6 +3,8 @@ import DashboardLayout from '@/components/layout/DashboardLayout'
 import UpdateUser from '@/components/pages/dashboard/users/UpdateUser'
 import { Button } from '@/components/ui/button'
 import ConfirmationPrompt from '@/components/ui/dashboard/common/ConfirmationPrompt'
+import ViewUser from '@/components/ui/dashboard/common/ViewUser'
+import Img from '@/components/ui/img'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import Typography from '@/components/ui/typography'
@@ -50,9 +52,10 @@ function UsersPage({ userData }: Props) {
           ))}
         </>
       ) : (
-        <Table className='max-w-4xl mx-auto'>
+        <Table className='max-w-5xl mx-auto'>
           <TableHeader>
             <TableRow>
+              <TableHead>Image</TableHead>
               <TableHead>Name</TableHead>
               <TableHead>Email</TableHead>
               <TableHead>Role</TableHead>
@@ -64,7 +67,24 @@ function UsersPage({ userData }: Props) {
           <TableBody>
             {users?.map(user => (
               <TableRow key={user?.id}>
-                <TableCell className='font-medium'>{user?.name}</TableCell>
+                <TableCell>
+                  {user?.image ? (
+                    <Img
+                      className='min-w-[56px] w-14 h-14 object-cover rounded-full'
+                      src={user.image}
+                      alt={user.name}
+                    />
+                  ) : (
+                    <Img
+                      className='min-w-[56px] w-14 h-14 object-cover rounded-full'
+                      src='/avatar.png'
+                      alt={user.name}
+                    />
+                  )}
+                </TableCell>
+                <TableCell className='font-medium'>
+                  <ViewUser user={user} />
+                </TableCell>
                 <TableCell>{user?.email}</TableCell>
                 <TableCell> {transformRole(user?.role)}</TableCell>
                 <TableCell className='text-right'>{user?.bookings?.length}</TableCell>

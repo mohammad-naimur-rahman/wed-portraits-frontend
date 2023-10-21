@@ -1,5 +1,6 @@
 import ButtonExtended from '@/components/ui/buttonExtended'
 import ConfirmationPrompt from '@/components/ui/dashboard/common/ConfirmationPrompt'
+import ViewUser from '@/components/ui/dashboard/common/ViewUser'
 import Img from '@/components/ui/img'
 import Typography from '@/components/ui/typography'
 import { useDeleteBookingMutation } from '@/redux/features/bookingApi'
@@ -52,7 +53,9 @@ export default function BookingCard({ booking }: Props) {
           </Link>
           <div className='flex gap-5 items-center flex-wrap'>
             <Typography variant='h5'>Category: {service?.category}</Typography>
-            <Typography variant='h5'>Client: {user?.name}</Typography>
+            <Typography variant='body' className='flex items-center gap-2'>
+              Booked by: <ViewUser user={user} />
+            </Typography>
           </div>
           <div className='flex items-center gap-8 flex-wrap'>
             <Typography variant='h3' className='font-semibold'>
