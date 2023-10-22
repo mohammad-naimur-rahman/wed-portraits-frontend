@@ -91,9 +91,11 @@
   }
 }
 
-.swiper-slide {
-  background-position: center;
-  background-size: cover;
-  max-width: 500px;
-  min-height: 400px;
+.testimonial-slider-container {
+  .swiper-slide {
+    background-position: center;
+    background-size: cover;
+    max-width: 500px;
+    min-height: 400px;
+  }
 }

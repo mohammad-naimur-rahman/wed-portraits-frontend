@@ -33,6 +33,7 @@ export default function SelectDate({ cartItem, service, setcartItems }: Props) {
       })
     })
   }
+
   return (
     <>
       {forbiddenDays ? (
@@ -49,6 +50,7 @@ export default function SelectDate({ cartItem, service, setcartItems }: Props) {
             <Calendar
               mode='single'
               selected={new Date(currentDate)}
+              defaultMonth={new Date(currentDate.getFullYear(), currentDate.getMonth())}
               // @ts-ignore
               onSelect={setDateForService}
               disabled={[{ before: new Date() }, ...forbiddenDays]}

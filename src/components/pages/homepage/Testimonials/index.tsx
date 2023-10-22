@@ -10,7 +10,7 @@ interface Props {
 
 export default function Testimonials({ testimonials }: Props) {
   return (
-    <section className='container'>
+    <section className='container testimonial-slider-container'>
       <Typography className='text-center pt-8 pb-4' variant='h1'>
         Testimonials
       </Typography>
