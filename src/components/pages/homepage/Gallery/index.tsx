@@ -13,8 +13,6 @@ export default function Gallery({ images }: Props) {
   const [lightboxSrc, setlightboxSrc] = useState('')
   const [toggleLightbox, settoggleLightbox] = useState(false)
 
-  console.log(lightboxSrc, toggleLightbox)
-
   const handleLightbox = (src: string) => {
     setlightboxSrc(src)
     settoggleLightbox(true)
