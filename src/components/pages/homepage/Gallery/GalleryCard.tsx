@@ -2,14 +2,18 @@ import Img from '@/components/ui/img'
 import Typography from '@/components/ui/typography'
 import { IGallery } from '@/types/IGallery'
 import { format } from 'date-fns'
+import { HTMLProps } from 'react'
 
-interface Props {
+interface Props extends HTMLProps<HTMLDivElement> {
   image: IGallery
+  handleLightbox: any
 }
 
-export default function GalleryCard({ image }: Props) {
+export default function GalleryCard({ image, handleLightbox }: Props) {
   return (
-    <div className='flex flex-col gap-3 shadow-md relative group'>
+    <div
+      className='flex flex-col gap-3 shadow-md relative group cursor-pointer'
+      onClick={() => handleLightbox(image?.image)}>
       <Img src={image?.image} alt={image?.id} />
       <Typography
         variant='h5'
