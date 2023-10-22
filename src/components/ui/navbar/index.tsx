@@ -1,3 +1,4 @@
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import Link from 'next/link'
 import Img from '../img'
 import Cart from './Cart'
@@ -29,9 +30,39 @@ export default function Navbar() {
       </Link>
       <Navmenu navigationMenu={navigationMenu} />
       <div className='flex items-center gap-5'>
-        <Cart />
-        <ThemeSwitcher />
-        <ProfileDropdown />
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger>
+              <Cart />
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Cart</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger>
+              <ThemeSwitcher />
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Theme Switcher</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger>
+              <ProfileDropdown />
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Profile Menu</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+
         <MobileNavmenu navigationMenu={navigationMenu} />
       </div>
     </nav>
