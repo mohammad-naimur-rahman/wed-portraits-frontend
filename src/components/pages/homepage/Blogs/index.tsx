@@ -1,4 +1,5 @@
 import ButtonExtended from '@/components/ui/buttonExtended'
+import Reveal from '@/components/ui/reveal'
 import Typography from '@/components/ui/typography'
 import { IBlog } from '@/types/IBlog'
 import { FolderSearch } from 'lucide-react'
@@ -12,12 +13,14 @@ interface Props {
 export default function Blogs({ blogs }: Props) {
   return (
     <section className='container py-10'>
-      <Typography className='text-center pt-8 pb-4' variant='h1'>
-        Blogs
-      </Typography>
-      <Typography variant='h3' className='text-center pb-8'>
-        Read Our Blogs
-      </Typography>
+      <Reveal inViewClassName='animate-shrink'>
+        <Typography className='text-center pt-8 pb-4' variant='h1'>
+          Blogs
+        </Typography>
+        <Typography variant='h3' className='text-center pb-8'>
+          Read Our Blogs
+        </Typography>
+      </Reveal>
 
       <div className='grid grid-cols-1 md:grid-cols-2'>
         {blogs?.map(blog => (

@@ -1,4 +1,5 @@
 import Img from '@/components/ui/img'
+import Reveal from '@/components/ui/reveal'
 import Typography from '@/components/ui/typography'
 
 interface CardProps {
@@ -23,12 +24,14 @@ function Card({ imgSrc, title, description }: CardProps) {
 export default function Overview() {
   return (
     <section className='py-10'>
-      <Typography className='text-center pt-8 pb-4' variant='h1'>
-        Overview
-      </Typography>
-      <Typography variant='h3' className='text-center pb-8'>
-        How We Work
-      </Typography>
+      <Reveal inViewClassName='animate-shrink'>
+        <Typography className='text-center pt-8 pb-4' variant='h1'>
+          Overview
+        </Typography>
+        <Typography variant='h3' className='text-center pb-8'>
+          How We Work
+        </Typography>
+      </Reveal>
 
       <div className='flex flex-col min-[950px]:flex-row items-center justify-center'>
         <Card

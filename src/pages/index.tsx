@@ -8,6 +8,7 @@ import Overview from '@/components/pages/homepage/Overview'
 import Testimonials from '@/components/pages/homepage/Testimonials'
 import Services from '@/components/pages/homepage/services'
 import ButtonExtended from '@/components/ui/buttonExtended'
+import Reveal from '@/components/ui/reveal'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import Typography from '@/components/ui/typography'
 import { serviceCategoryArray } from '@/constants/dashboard/serviceCategoryArray'
@@ -64,12 +65,14 @@ export default function Home({
       <HomepageHeader />
       <Overview />
 
-      <Typography className='text-center pt-8 pb-4' variant='h1'>
-        Our Services
-      </Typography>
-      <Typography variant='h3' className='text-center pb-8'>
-        Some of our services
-      </Typography>
+      <Reveal inViewClassName='animate-shrink'>
+        <Typography className='text-center pt-8 pb-4' variant='h1'>
+          Our Services
+        </Typography>
+        <Typography variant='h3' className='text-center pb-8'>
+          Some of our services
+        </Typography>
+      </Reveal>
       <Tabs defaultValue='All Categories'>
         <div className='flex w-full justify-center'>
           <TabsList>
@@ -104,12 +107,14 @@ export default function Home({
         </Link>
       </div>
 
-      <Typography className='text-center pt-8 pb-4' variant='h1'>
-        Upcoming Services
-      </Typography>
-      <Typography variant='h3' className='text-center pb-8'>
-        Some of our upcoming services
-      </Typography>
+      <Reveal inViewClassName='animate-shrink'>
+        <Typography className='text-center pt-8 pb-4' variant='h1'>
+          Upcoming Services
+        </Typography>
+        <Typography variant='h3' className='text-center pb-8'>
+          Some of our upcoming services
+        </Typography>
+      </Reveal>
       <Services services={allUpcomingServices} />
       <div className='flex justify-center py-5'>
         <Link href='/services'>

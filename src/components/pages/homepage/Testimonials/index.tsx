@@ -1,3 +1,4 @@
+import Reveal from '@/components/ui/reveal'
 import Typography from '@/components/ui/typography'
 import { IReview } from '@/types/IReview'
 import { Autoplay, Pagination } from 'swiper/modules'
@@ -11,12 +12,14 @@ interface Props {
 export default function Testimonials({ testimonials }: Props) {
   return (
     <section className='container testimonial-slider-container'>
-      <Typography className='text-center pt-8 pb-4' variant='h1'>
-        Testimonials
-      </Typography>
-      <Typography variant='h3' className='text-center pb-8'>
-        What our clients say about us
-      </Typography>
+      <Reveal inViewClassName='animate-shrink'>
+        <Typography className='text-center pt-8 pb-4' variant='h1'>
+          Testimonials
+        </Typography>
+        <Typography variant='h3' className='text-center pb-8'>
+          What our clients say about us
+        </Typography>
+      </Reveal>
 
       <Swiper
         effect='coverflow'

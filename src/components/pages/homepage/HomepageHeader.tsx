@@ -24,7 +24,6 @@ export default function HomepageHeader() {
         <div className='w-full lg:w-1/2'>
           <Swiper
             effect='fade'
-            grabCursor
             centeredSlides
             slidesPerView={1}
             modules={[Autoplay, EffectFade]}
@@ -69,10 +68,9 @@ export default function HomepageHeader() {
         </div>
       </div>
       <div className='lg:h-auto xl:h-[calc(50vh_-_32px)] flex flex-col lg:flex-row'>
-        <div className='w-full lg:w-1/2'>
+        <div className='w-full lg:w-1/2 order-2 lg:order-1'>
           <Swiper
             effect='fade'
-            grabCursor
             centeredSlides
             slidesPerView={1}
             modules={[Autoplay, EffectFade]}
