@@ -71,7 +71,7 @@ export default function UpdateBooking({ booking }: Props) {
             icon={<PenSquare />}
             className='min-w-[40px]'
             size='sm'
-            disabled={booking?.status === 'cancelled' || booking?.status === 'fulfilled'}>
+            disabled={['confirmed', 'cancelled', 'fulfilled'].includes(booking?.status)}>
             Update Booking
           </ButtonExtended>
         </DialogTrigger>

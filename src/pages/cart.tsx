@@ -10,6 +10,7 @@ import { ICartItem, emptyCart } from '@/redux/features/cartSlice'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { IError } from '@/types/IError'
 import { getAccessToken } from '@/utils/auth/getAccessToken'
+import { getUserId } from '@/utils/auth/getUserId'
 import { errorMessage } from '@/utils/error'
 import { loadStripe } from '@stripe/stripe-js'
 import axios from 'axios'
@@ -52,37 +53,18 @@ export default function CartPage() {
     }
   }, [cartArr])
 
-  const createBookingRequest = async (item: IBookItem) => {
-    const payload = {
-      service: item.service.id,
-      date: new Date(item.date),
-      status: 'pending',
-    }
-    const result = await axios.post(`${envVars.API_URL}/bookings`, payload, {
-      headers: {
-        Authorization: `Bearer ${getAccessToken()}`,
-      },
-    })
-
-    if (result.status === 201) {
-      toast.success('Booking Successful')
-      dispatch(emptyCart())
-      push('/dashboard/my-bookings')
-    }
-
-    return result
-  }
-
-  const requests = cartItems.map(item => () => createBookingRequest(item))
-
   const bookServices = async () => {
     try {
       const stripe = await loadStripe(envVars.STRIPE_PUBLISHABLE_KEY)
-      const checkoutSession = await axios.post(`${envVars.API_URL}/payment`, cartItems, {
-        headers: {
-          Authorization: `Bearer ${getAccessToken()}`,
-        },
-      })
+      const checkoutSession = await axios.post(
+        `${envVars.API_URL}/payment`,
+        { services: cartItems, user: getUserId() },
+        {
+          headers: {
+            Authorization: `Bearer ${getAccessToken()}`,
+          },
+        }
+      )
 
       if (checkoutSession.status === 201) {
         toast.success(checkoutSession?.data?.message)
