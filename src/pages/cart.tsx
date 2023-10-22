@@ -11,6 +11,7 @@ import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { IError } from '@/types/IError'
 import { getAccessToken } from '@/utils/auth/getAccessToken'
 import { errorMessage } from '@/utils/error'
+import { loadStripe } from '@stripe/stripe-js'
 import axios from 'axios'
 import { Album, FolderSearch } from 'lucide-react'
 import Link from 'next/link'
@@ -76,9 +77,21 @@ export default function CartPage() {
 
   const bookServices = async () => {
     try {
-      for (const request of requests) {
-        await request()
+      const stripe = await loadStripe(envVars.STRIPE_PUBLISHABLE_KEY)
+      const checkoutSession = await axios.post(`${envVars.API_URL}/payment`, cartItems, {
+        headers: {
+          Authorization: `Bearer ${getAccessToken()}`,
+        },
+      })
+
+      if (checkoutSession.status === 201) {
+        toast.success(checkoutSession?.data?.message)
+        dispatch(emptyCart())
       }
+
+      await stripe?.redirectToCheckout({
+        sessionId: checkoutSession?.data?.data,
+      })
     } catch (error) {
       toast.error(errorMessage(error as IError))
     }
@@ -117,7 +130,7 @@ export default function CartPage() {
             <>
               {getAccessToken() ? (
                 <ButtonExtended icon={<Album />} size='lg' onClick={() => setshowPrompt(true)}>
-                  Book Services
+                  Proceed to payment
                 </ButtonExtended>
               ) : (
                 <Link href={`/login?redirected=true&prevPath=${asPath}`}>

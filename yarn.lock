@@ -635,6 +635,11 @@
   resolved "https://registry.yarnpkg.com/@rushstack/eslint-patch/-/eslint-patch-1.5.1.tgz#5f1b518ec5fa54437c0b7c4a821546c64fed6922"
   integrity sha512-6i/8UoL0P5y4leBIGzvkZdS85RDMG9y1ihZzmTZQ5LdHUYmZ7pKFoj8X0236s3lusPs1Fa5HTQUpwI+UfTcmeA==
 
+"@stripe/stripe-js@^2.1.9":
+  version "2.1.9"
+  resolved "https://registry.yarnpkg.com/@stripe/stripe-js/-/stripe-js-2.1.9.tgz#de7fd618ae31195fa0e8b16f5fc138d72f4d0b63"
+  integrity sha512-0RSvCJrzEVx52e8hbSAcZ2vv6OzoFj5fe5XC50GSrcev1Y4t2XDE6W5CIhR/Y6l3CPgO/P4luqoLWuvpUkBhig==
+
 "@swc/helpers@0.5.2":
   version "0.5.2"
   resolved "https://registry.yarnpkg.com/@swc/helpers/-/helpers-0.5.2.tgz#85ea0c76450b61ad7d10a37050289eded783c27d"
