@@ -1,8 +1,12 @@
 # Wed Portraits Photography
 
+![Wed Portraits Photography](./wed-portraits.jpg)
+
 ### It's a fullstack application using MERN stack and this is the frontend part of the application
 
 **Live Link**: https://wed-portraits.vercel.app/
+
+**Preview**: [YouTube](https://youtu.be/yaHh74SrBdM)
 
 **Backend Repository**: https://github.com/mohammad-naimur-rahman/wed-portraits-server
 
