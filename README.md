@@ -1,6 +1,6 @@
 # Wed Portraits Photography
 
-![Wed Portraits Photography](./wed-portraits.jpg)
+![Wed Portraits Photography](./wed_portraits.jpg)
 
 ### It's a fullstack application using MERN stack and this is the frontend part of the application
 
